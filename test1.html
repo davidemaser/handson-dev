@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="assets/js/jquery.min.js"></script>
+    <style type="text/css">
+        body{
+            margin: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/handsontable.full.css">
+    <script src="assets/js/handsontable.full.js"></script>
+</head>
+<body>
+<div id="testing"></div>
+<script>
+    var first,
+            maxed = true
+            , resizeTimeout
+            , availableWidth
+            , availableHeight
+            , $window = $(window)
+            , $example1 = $('#testing');
+
+    var calculateSize = function () {
+        var offset = $example1.offset();
+        availableWidth = $window.width() - offset.left + $window.scrollLeft();
+        availableHeight = $window.height() - offset.top + $window.scrollTop();
+    };
+    $window.on('resize', calculateSize);
+    $("#testing").handsontable({
+        startRows: 8,
+        //startCols: 8,
+        colHeaders: ["ID", "Product", "SKU", "Units", "Collection", "Price"],
+        rowHeaders: true,
+        stretchH: 'all',
+        columnSorting: true,
+        columns: [
+            {data: 0},
+            {data: 1},
+            {data: 2},
+            {data: 3},
+            {data: 4},
+            {data: 5,
+                type: 'numeric',
+                format: '$0,0.00',
+                language: 'en'}
+        ],
+        contextMenu: true,
+        width: function () {
+            if (maxed && availableWidth === void 0) {
+                calculateSize();
+            }
+            return maxed ? availableWidth : 400;
+        },
+        height: function () {
+            if (maxed && availableHeight === void 0) {
+                calculateSize();
+            }
+            return maxed ? availableHeight : 300;
+        }
+        /*onChange: function (change) {
+         if (first) {
+         first = false;
+         return; //don't save this change
+         }
+         $.ajax({ //saves changes from Handsontable
+         url: "save.php",
+         dataType: "json",
+         type: "POST",
+         data: {"data": $("#example").handsontable('getData')}, //returns full array of grid data
+         //data: change, //contains only information about changed cells
+         success: function (data) {
+         console.log("saved", data);
+         },
+         error: function (data) {
+         console.log("error", data);
+         }
+         });
+         }*/
+    });
+
+    $.ajax({
+        url: 'assets/data/test.json',
+        dataType: 'json',
+        type: 'GET',
+        success: function(res){
+            $("#testing").handsontable("loadData", res.data);
+        }
+    });
+
+
+</script>
+</body>
+</html>
