@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="assets/js/jquery.min.js"></script>
+    <style type="text/css">
+        body{
+            margin: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/handsontable.full.css">
+    <script src="assets/js/handsontable.full.js"></script>
+</head>
+<body>
+<div id="testing"></div>
+<script>
+    function getCarData() {
+        return [
+            ["Nissan", 2013, "black", "black"],
+            ["Nissan", 2014, "blue", "blue"],
+            ["Chrysler", 2015, "yellow", "black"],
+            ["Volvo", 2016, "white", "gray"]
+        ];
+    }
+    var
+        container3 = document.getElementById('testing'),
+        hot3;
+
+hot3 = new Handsontable(container3, {
+    data: getCarData(),
+    colHeaders: ['Car', 'Year', 'Chassis color', 'Bumper color'],
+    columns: [
+        {
+            type: 'autocomplete',
+            source: function (query, process) {
+                $.ajax({
+                    //url: 'php/cars.php', // commented out because our website is hosted as a set of static pages
+                    url: 'assets/data/colors.json',
+                    dataType: 'json',
+                    data: {
+                        query: query
+                    },
+                    success: function (response) {
+                        console.log("response", response);
+                        //process(JSON.parse(response.data)); // JSON.parse takes string as a argument
+                        process(response.data);
+
+                    }
+                });
+            },
+            strict: true
+        },
+        {}, // Year is a default text column
+        {}, // Chassis color is a default text column
+        {} // Bumper color is a default text column
+    ]
+});</script>
+</body>
+</html>

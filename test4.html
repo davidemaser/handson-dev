@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="assets/js/jquery.min.js"></script>
+    <style type="text/css">
+        body{
+            margin: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/handsontable.full.css">
+    <script src="assets/js/handsontable.full.js"></script>
+</head>
+<body>
+<div class="checklist">
+    <label><input type="checkbox" id="rowHeaders" checked="checked" autocomplete="off"> Show row headers</label>
+    <label><input type="checkbox" id="colHeaders" checked="checked" autocomplete="off"> Show col headers</label>
+</div>
+<div id="example1" class="hot htRemoveRow handsontable"></div>
+<script>var
+        data = [
+            ['', 'Kia', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
+            ['2012', 10, 11, 12, 13, 15, 16],
+            ['2013', 10, 11, 12, 13, 15, 16],
+            ['2014', 10, 11, 12, 13, 15, 16],
+            ['2015', 10, 11, 12, 13, 15, 16],
+            ['2016', 10, 11, 12, 13, 15, 16]
+        ],
+        container = document.getElementById('example1'),
+        selectFirst = document.getElementById('selectFirst'),
+        rowHeaders = document.getElementById('rowHeaders'),
+        colHeaders = document.getElementById('colHeaders'),
+        hot;
+
+hot = new Handsontable(container, {
+    rowHeaders: true,
+    colHeaders: true,
+    outsideClickDeselects: false
+});
+hot.loadData(data);
+
+
+Handsontable.Dom.addEvent(rowHeaders, 'click', function () {
+    hot.updateSettings({
+        rowHeaders: this.checked
+    });
+});
+Handsontable.Dom.addEvent(colHeaders, 'click', function () {
+    hot.updateSettings({
+        colHeaders: this.checked
+    });
+});</script>
+</body>
+</html>

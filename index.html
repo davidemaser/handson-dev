@@ -13,55 +13,28 @@
     <script src="assets/js/handsontable.full.js"></script>
 </head>
 <body>
+<div class="checklist">
+    <label><input type="checkbox" id="rowHeaders" checked="checked" autocomplete="off"> Show row headers</label>
+    <label><input type="checkbox" id="colHeaders" checked="checked" autocomplete="off"> Show col headers</label>
+</div>
 <div id="testing"></div>
 <script>
-    var first,
-        maxed = true
-            , resizeTimeout
-            , availableWidth
-            , availableHeight
-            , $window = $(window)
-            , $example1 = $('#testing');
-
-    var calculateSize = function () {
-        var offset = $example1.offset();
-        availableWidth = $window.width() - offset.left + $window.scrollLeft();
-        availableHeight = $window.height() - offset.top + $window.scrollTop();
-    };
-    $window.on('resize', calculateSize);
+    Handsontable.Dom.addEvent(rowHeaders, 'click', function () {
+        hot.updateSettings({
+            rowHeaders: this.checked
+        });
+    });
+    Handsontable.Dom.addEvent(colHeaders, 'click', function () {
+        hot.updateSettings({
+            colHeaders: this.checked
+        });
+    });
+    var first = true;
     $("#testing").handsontable({
-        startRows: 8,
-        //startCols: 8,
-        colHeaders: ["ID", "Product", "SKU", "Units", "Collection", "Price"],
+        colHeaders: ['ID', 'STYLE NUMBER', 'PO NUMBER', 'USER', 'DATE', 'COMPLETED'],
         rowHeaders: true,
-        stretchH: 'all',
-        columnSorting: true,
-        columns: [
-            {data: 0,
-                readOnly: true},
-            {data: 1},
-            {data: 2},
-            {data: 3},
-            {data: 4},
-            {data: 5,
-                type: 'numeric',
-                format: '$0,0.00',
-                language: 'en'}
-        ],
         contextMenu: true,
-        width: function () {
-            if (maxed && availableWidth === void 0) {
-                calculateSize();
-            }
-            return maxed ? availableWidth : 400;
-        },
-        height: function () {
-            if (maxed && availableHeight === void 0) {
-                calculateSize();
-            }
-            return maxed ? availableHeight : 300;
-        }
-        /*onChange: function (change) {
+        onChange: function (change) {
             if (first) {
                 first = false;
                 return; //don't save this change
@@ -70,7 +43,7 @@
                 url: "save.php",
                 dataType: "json",
                 type: "POST",
-                data: {"data": $("#example").handsontable('getData')}, //returns full array of grid data
+                data: {"data": $("#testing").handsontable('getData')}, //returns full array of grid data
                 //data: change, //contains only information about changed cells
                 success: function (data) {
                     console.log("saved", data);
@@ -79,10 +52,10 @@
                     console.log("error", data);
                 }
             });
-        }*/
+        }
     });
 
-    $.ajax({
+    $.ajax({ //loads data to Handsontable
         url: 'assets/data/test.json',
         dataType: 'json',
         type: 'GET',
@@ -90,8 +63,6 @@
             $("#testing").handsontable("loadData", res.data);
         }
     });
-
-
 </script>
 </body>
 </html>
