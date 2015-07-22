@@ -1,0 +1,21 @@
+{
+  "name": "HANDSON",
+  "version": "1.0.0",
+  "description": "HandsonTable testing",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidemaser/handson-dev.git"
+  },
+  "author": "David Maser",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/davidemaser/handson-dev/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5"
+  }
+}
