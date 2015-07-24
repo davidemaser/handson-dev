@@ -42,16 +42,17 @@ $(eZone).handsontable({
                     var cc = change[i];
                     var orRow = cc.slice(-4)[0];
                     var orCol = cc.slice(-3)[0];
-                    var orHue = cc.slice(-2)[0];
-                    var neCol = cc.slice(-1)[0];
+                    var orHue = cc.slice(-2)[0] || 'empty value';
+                    var neCol = cc.slice(-1)[0] || 'empty value';
                     var message = $(eZone).handsontable('getColHeader',orCol)+' changed from '+orHue+' to '+neCol+' on line '+(orRow+1)+', column '+(orCol+1);
                     dispMess.push(message);
                     dispRow.push(orRow);
                     dispCol.push(orCol);
                     for(j=0;j<dispMess.length;j++){
-                        $(eMessage).append('<div class="status_mess" data-column="'+dispCol[j]+'" data-row="'+dispRow[j]+'">'+dispMess[j]+'<div>');
+                        $(eMessage).append('<div class="status_mess num'+[j]+' new" data-column="'+dispCol[j]+'" data-row="'+dispRow[j]+'">'+dispMess[j]+'<div>');
+                        $('#message div:last-child').focus();
+                        $('#message div:last-child').removeClass('new');
                     }
-                    //$('#message').html(dispMess);
                 }
         }
     },
