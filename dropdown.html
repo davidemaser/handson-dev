@@ -13,7 +13,7 @@
             background-color: #00b359!important;
             color:#fff!important;
         }
-        .status_mess {
+        .status_mess,.save-message {
             background-color:transparent;
             -webkit-transition: background-color 500ms linear;
             -moz-transition: background-color 500ms linear;
@@ -23,6 +23,9 @@
         }
         .new{
             background-color: #eeeeee;
+        }
+        .new-atsave{
+            background-color: rgba(2, 238, 51, 0.31);
         }
         .il {
             display: inline-block;
@@ -53,7 +56,9 @@
         <label for="sRowHead"><input type="checkbox" id="sRowHead" checked="checked" />Show Row Headers</label>
         <label for="sColHead"><input type="checkbox" id="sColHead" checked="checked" />Show Column Headers</label>
         </div>
+    <div class="il autosave"><label for="autosave-feature"><input type="checkbox" id="autosave-feature" />Autosave</label></div>
     <div class="il jump"><input type="text" placeholder="Go to row..." id="jump-to-row"/> </div>
+    <div class="il flush"><button>Flush activity log</button></div>
 </div>
 
 <div id="message"></div>

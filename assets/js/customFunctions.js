@@ -37,6 +37,25 @@ $(eZone).handsontable({
     afterChange: function (change, source) {
         $(eMessage).empty();
         if(change){
+            //save
+            if($('#autosave-feature').is(':checked')) {
+                $.ajax({ //saves changes from Handsontable
+                    url: "assets/data/test2.json",
+                    dataType: "json",
+                    type: "POST",
+                    data: {"data": $("#testing").handsontable('getData')}, //returns full array of grid data
+                    //data: change, //contains only information about changed cells
+                    success: function (data) {
+                        $('#save-message').remove();
+                        $(eMessage).append('<div class="save-message new-atsave">Data Saved</div>');
+                        setTimeout("$('.save-message').focus();$('.save-message').removeClass('new-atsave')",1500);
+                    },
+                    error: function (data) {
+                        console.log("error", data);
+                    }
+                });
+            }
+            //end save
             if(change.length>0)
                 for(i=0;i<change.length;i++){
                     var cc = change[i];
@@ -140,25 +159,6 @@ $(eZone).handsontable({
         }
         return maxed ? availableHeight : 300;
     }
-    /*onChange: function (change) {
-     if (first) {
-     first = false;
-     return; //don't save this change
-     }
-     $.ajax({ //saves changes from Handsontable
-     url: "save.php",
-     dataType: "json",
-     type: "POST",
-     data: {"data": $("#example").handsontable('getData')}, //returns full array of grid data
-     //data: change, //contains only information about changed cells
-     success: function (data) {
-     console.log("saved", data);
-     },
-     error: function (data) {
-     console.log("error", data);
-     }
-     });
-     }*/
 });
 var hot = $(eZone).handsontable('getInstance');
 
@@ -198,6 +198,10 @@ $('#sRowHead').change(function(){
             rowHeaders: false
         });
     }
+});
+$('.flush button').click(function(){
+    dispMess = [];
+    $(eMessage).empty();
 });
 $('#sColHead').change(function(){
     if($(this).is(':checked')){
