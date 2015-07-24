@@ -7,23 +7,44 @@
     <style type="text/css">
         body{
             margin: 0;
+            font-family: monospace;
         }
         .customClass{
             background-color: #00b359!important;
             color:#fff!important;
+        }
+        .il {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        #dts-function {
+            margin: 10px;
+            padding: 10px;
+        }
+        #message {
+            border: 1px solid #eee;
+            position: relative;
+            display: block;
+            padding: 20px;
+            margin: 20px;
+            max-height: 100px;
+            overflow-y: auto;
         }
     </style>
     <link rel="stylesheet" href="assets/css/handsontable.full.css">
     <script src="assets/js/handsontable.full.js"></script>
 </head>
 <body>
-<input id="search_field" type="search" placeholder="Search">
-<div class="rc-display">
-    <label for="sRowHead">Show Row Headers</label>
-    <input type="checkbox" id="sRowHead" checked="checked" />
-    <label for="sColHead">Show Column Headers</label>
-    <input type="checkbox" id="sColHead" checked="checked" />
+<div id="dts-function">
+    <div class="il search"><input id="search_field" type="search" placeholder="Search..."></div>
+    <div class="il options">
+        <label for="sRowHead"><input type="checkbox" id="sRowHead" checked="checked" />Show Row Headers</label>
+        <label for="sColHead"><input type="checkbox" id="sColHead" checked="checked" />Show Column Headers</label>
+        </div>
+    <div class="il jump"><input type="text" placeholder="Go to row..." id="jump-to-row"/> </div>
 </div>
+
 <div id="message"></div>
 <section id="global">
 <div id="testing"></div>

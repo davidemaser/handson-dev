@@ -9,6 +9,7 @@ var first,
     , $window = $(window)
     , eZone = $('#testing')
     , searchField = document.getElementById('search_field')
+    , jumpField = document.getElementById('jump-to-row')
     , eMessage = $('#message');
 
 var calculateSize = function () {
@@ -26,8 +27,13 @@ $(eZone).handsontable({
     colHeaders: ['ITEM ID','BRAND', 'NAME', 'ACTIVE', 'DATE ADDED', 'COLOR', 'SEASON', 'PRICE', 'MSRP', 'SKU', 'CATEGORY'],
     rowHeaders: true,
     stretchH: 'all',
+    colWidths: [30, 100, 200, 30, 50, 47, 47, 47, 47, 47],
     columnSorting: true,
-    fixedColumnsLeft: 2,
+    //fixedColumnsLeft: 2,
+    manualColumnFreeze: true,
+    manualColumnResize: true,
+    manualRowResize: true,
+    //groups: true,
     afterChange: function (change, source) {
         $(eMessage).empty();
         if(change){
@@ -170,6 +176,11 @@ function onlyExactMatch(queryStr, value) {
 Handsontable.Dom.addEvent(searchField, 'keyup', function (event) {
     var queryResult = hot.search.query(this.value);
     hot.render();
+});
+Handsontable.Dom.addEvent(jumpField, 'keyup', function (event) {
+    //var queryResult = hot.search.query(this.value);
+    var a = this.value.toString();
+    hot.selectCell(a, 0);
 });
 $('body').on( "click", ".status_mess", function() {
     var a = $(this).attr('data-row'),
