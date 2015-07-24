@@ -116,7 +116,9 @@ $(eZone).handsontable({
         {data: 9}
     ],
     contextMenu: true,
-    search: true,
+    search: {
+        searchResultClass: 'customClass'
+    },
     fillHandle: true,
     formulas: true,
     width: function () {
