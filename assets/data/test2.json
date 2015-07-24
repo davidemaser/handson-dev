@@ -1,0 +1,48 @@
+{
+  "data": [
+    [
+      1,
+      "Arcteryx",
+      "Ooo La La Pants",
+      true,
+      "2015-01-01",
+      "orange",
+      "228.99",
+      "298.99",
+      "9978994"
+    ],
+    [
+      2,
+      "The North Face",
+      "Wowee Shorts",
+      false,
+      null,
+      "black",
+      "178.99",
+      "248.99",
+      "9445678"
+    ],
+      [
+      3,
+      "Sugoi",
+      "Yum Yum T-Shirt",
+      true,
+      null,
+        "red",
+      "588.99",
+      "780.99",
+      "8756640"
+      ],
+      [
+      4,
+      "Icebreaker",
+      "Betty Boop Shoes",
+      false,
+      null,
+        "blue",
+      "99.99",
+      "150.99",
+      "4816972"
+      ]
+  ]
+}
