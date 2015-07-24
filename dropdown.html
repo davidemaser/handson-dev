@@ -23,17 +23,18 @@
             , availableWidth
             , availableHeight
             , $window = $(window)
-            , $example1 = $('#testing');
-    var searchField = document.getElementById('search_field');
+            , eZone = $('#testing')
+            , searchField = document.getElementById('search_field')
+            , eMessage = $('#message');
 
     var calculateSize = function () {
-        var offset = $example1.offset();
+        var offset = eZone.offset();
         availableWidth = $window.width() - offset.left + $window.scrollLeft();
         availableHeight = $window.height() - offset.top + $window.scrollTop();
     };
     $window.on('resize', calculateSize);
     var dispMess = [];
-    $("#testing").handsontable({
+    $(eZone).handsontable({
         startRows: 8,
         //startCols: 8,
         colHeaders: ['ITEM ID','BRAND', 'NAME', 'ACTIVE', 'DATE ADDED', 'COLOR', 'PRICE', 'MSRP', 'SKU', 'CATEGORY'],
@@ -41,7 +42,7 @@
         stretchH: 'all',
         columnSorting: true,
         afterChange: function (change, source) {
-            $('#message').empty();
+            $(eMessage).empty();
             if(change){
                 if(change.length>0)
                 for(i=0;i<change.length;i++){
@@ -51,15 +52,13 @@
                     var orHue = cc.slice(-2)[0];
                     var neCol = cc.slice(-1)[0];
 
-                    var message = $("#testing").handsontable('getColHeader',orCol)+' changed from '+orHue+' to '+neCol+' on line '+(orRow+1)+', column '+(orCol+1);
+                    var message = $(eZone).handsontable('getColHeader',orCol)+' changed from '+orHue+' to '+neCol+' on line '+(orRow+1)+', column '+(orCol+1);
                     dispMess.push(message);
                     for(j=0;j<dispMess.length;j++){
-                        $('#message').append('<div class="status_mess">'+dispMess[j]+'<div>');
+                        $(eMessage).append('<div class="status_mess">'+dispMess[j]+'<div>');
                     }
                     //$('#message').html(dispMess);
                 }
-
-
             }
         },
         columns: [
@@ -148,7 +147,7 @@
          });
          }*/
     });
-    var hot = $("#testing").handsontable('getInstance');
+    var hot = $(eZone).handsontable('getInstance');
 
     $.ajax({
         url: 'assets/data/test2.json',
