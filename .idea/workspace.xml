@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c00e948e-7fb4-43e3-9d7c-8765cd7d8e3f" name="Default" comment="Modal CTAs">
+    <list default="true" id="c00e948e-7fb4-43e3-9d7c-8765cd7d8e3f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/customFunctions.js" afterPath="$PROJECT_DIR$/assets/js/customFunctions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/gen-style.css" afterPath="$PROJECT_DIR$/assets/css/gen-style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HANDSON.iws" />
@@ -38,20 +37,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="customFunctions.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="customFunctions.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/customFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.133333" vertical-offset="8066" max-vertical-offset="8640">
-              <caret line="470" column="10" selection-start-line="470" selection-start-column="10" selection-end-line="470" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.21602787" vertical-offset="8084" max-vertical-offset="8748">
+              <caret line="456" column="30" selection-start-line="456" selection-start-column="30" selection-end-line="456" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gen-style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gen-style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/css/gen-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7308348" vertical-offset="813" max-vertical-offset="9324">
+            <state vertical-scroll-proportion="-14.3" vertical-offset="813" max-vertical-offset="9324">
               <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
               <folding />
             </state>
@@ -78,8 +77,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/dropdown.html" />
-        <option value="$PROJECT_DIR$/assets/js/customFunctions.js" />
         <option value="$PROJECT_DIR$/assets/css/gen-style.css" />
+        <option value="$PROJECT_DIR$/assets/js/customFunctions.js" />
       </list>
     </option>
   </component>
@@ -365,7 +364,13 @@
       <option name="project" value="LOCAL" />
       <updated>1438025209910</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="UI Styling">
+      <created>1438025773234</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1438025773234</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -424,7 +429,8 @@
     <MESSAGE value="Added json save and callbacks" />
     <MESSAGE value="UI styling" />
     <MESSAGE value="Modal CTAs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modal CTAs" />
+    <MESSAGE value="UI Styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI Styling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -700,18 +706,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/customFunctions.js">
+    <entry file="file://$PROJECT_DIR$/assets/css/gen-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.133333" vertical-offset="8066" max-vertical-offset="8640">
-          <caret line="470" column="10" selection-start-line="470" selection-start-column="10" selection-end-line="470" selection-end-column="10" />
+        <state vertical-scroll-proportion="-14.3" vertical-offset="813" max-vertical-offset="9324">
+          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/gen-style.css">
+    <entry file="file://$PROJECT_DIR$/assets/js/customFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7308348" vertical-offset="813" max-vertical-offset="9324">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.21602787" vertical-offset="8084" max-vertical-offset="8748">
+          <caret line="456" column="30" selection-start-line="456" selection-start-column="30" selection-end-line="456" selection-end-column="30" />
           <folding />
         </state>
       </provider>
