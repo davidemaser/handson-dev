@@ -446,3 +446,30 @@ for(var i = 0; i < keys.length; i++) {
         e.preventDefault();
     }
 }
+(function() {
+
+    "use strict";
+
+    var toggles = document.querySelectorAll(".c-hamburger");
+
+    for (var i = toggles.length - 1; i >= 0; i--) {
+        var toggle = toggles[i];
+        toggleHandler(toggle);
+    };
+
+    function toggleHandler(toggle) {
+        toggle.addEventListener( "click", function(e) {
+            e.preventDefault();
+            (this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
+        });
+    }
+
+})();
+$('.c-hamburger').on('click',function(){
+    console.log('clcick')
+    if($('.gutter').css('left') == '-400px'){
+        $('.gutter').animate({"left":"0px"});
+    }else{
+        $('.gutter').animate({"left":"-400px"});
+    }
+});

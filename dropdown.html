@@ -11,6 +11,17 @@
     <script src="assets/js/handsontable.full.js"></script>
 </head>
 <body>
+<div class="gutter">
+    <div class="rl trigger">
+        <button class="c-hamburger c-hamburger--htx">
+            <span>toggle menu</span>
+        </button>
+    </div>
+    <div class="gutter-content">
+        <div class="gutter-title">TITLE</div>
+    </div>
+</div>
+<div class="main">
 <div id="calculator" draggable="true" ondragstart="drag(event)">
     <!-- Screen and clear key -->
     <div class="top">
@@ -40,6 +51,7 @@
     </div>
 </div>
 <div id="dts-function">
+
     <div class="il search"><input id="search_field" type="search" placeholder="Search..."></div>
     <div class="il options">
         <label for="sRowHead"><input type="checkbox" class="checkbox" id="sRowHead" checked="checked" />Show Row Headers</label>
@@ -57,6 +69,7 @@
 <section id="global">
 <div id="testing"></div>
 </section>
+</div>
 <script src="assets/js/customFunctions.js"></script>
 </body>
 </html>

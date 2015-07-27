@@ -25,6 +25,13 @@ body{
     display: inline-block;
     margin-right: 10px;
 }
+.rl.trigger {
+    display: inline-block;
+    margin-left: -20px;
+    margin-right: 20px;
+    left: 420px;
+    position: absolute;
+}
 .fr {
     float:right;
     margin-left: 10px;
@@ -33,7 +40,7 @@ body{
 
 #dts-function {
     margin: 0 10px;
-    padding: 0 10px;
+    padding: 0 10px 0 110PX
 }
 input#search_field {
     outline: none;
@@ -66,7 +73,7 @@ input#search_field:focus {
     position: relative;
     display: block;
     padding: 20px 0;
-    margin: 20px;
+    margin: 20px 0;
     height: 100px;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.2);
@@ -369,4 +376,125 @@ input[type="checkbox"]:after {
     width: auto;
     margin: 10px;
     padding-bottom: 20px;
+}
+.gutter {
+    position: absolute;
+    width: 400px;
+    height: 100%;
+    left: -400px;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: #cb0032;
+    box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.3);
+}
+
+.gutter-content {
+    margin: 30px 10px;
+}
+
+.gutter-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+    /*border-bottom: 3px solid rgba(255, 255, 255, 0.3);*/
+    margin-left: -10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    margin-right: -10px;
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.3);
+}
+.c-hamburger {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 91px;
+    height: 91px;
+    font-size: 0;
+    text-indent: -9999px;
+    appearance: none;
+    box-shadow: none;
+    border-radius: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.c-hamburger:focus {
+    outline: none;
+}
+.c-hamburger span {
+    display: block;
+    position: absolute;
+    top: 44px;
+    left: 18px;
+    right: 18px;
+    height: 8px;
+    background: white;
+}
+
+.c-hamburger span::before,
+.c-hamburger span::after {
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: #fff;
+    content: "";
+}
+
+.c-hamburger span::before {
+    top: -20px;
+}
+
+.c-hamburger span::after {
+    bottom: -20px;
+}
+.c-hamburger--htx {
+    background-color: #ff3264;
+}
+
+.c-hamburger--htx span {
+    transition: background 0s 0.3s;
+}
+
+.c-hamburger--htx span::before,
+.c-hamburger--htx span::after {
+    transition-duration: 0.3s, 0.3s;
+    transition-delay: 0.3s, 0s;
+}
+
+.c-hamburger--htx span::before {
+    transition-property: top, transform;
+}
+
+.c-hamburger--htx span::after {
+    transition-property: bottom, transform;
+}
+
+/* active state, i.e. menu open */
+.c-hamburger--htx.is-active {
+    background-color: #cb0032;
+}
+
+.c-hamburger--htx.is-active span {
+    background: none;
+}
+
+.c-hamburger--htx.is-active span::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.c-hamburger--htx.is-active span::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
+
+.c-hamburger--htx.is-active span::before,
+.c-hamburger--htx.is-active span::after {
+    transition-delay: 0s, 0.3s;
 }
