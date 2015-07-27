@@ -416,6 +416,38 @@ input[type="checkbox"]:after {
     margin-right: -10px;
     text-shadow: 1px 1px rgba(255, 255, 255, 0.3);
 }
+.gutter-settings {
+    position: absolute;
+    bottom: 0;
+    width: 400px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.settings-text {
+    display: inline-block;
+    width: 320px;
+    float: left;
+    height: inherit;
+}
+.settings-icon {
+    display: inline-block;
+    width: 80px;
+    float: right;
+    height: inherit;
+    background-color: rgba(0, 0, 0, 0.58);
+    color: rgba(255, 255, 255, 0.40);
+    font-size: 60px;
+}
+
+.settings-text div {
+    margin: 25px;
+    font-size: 34px;
+    line-height: 30px;
+    font-weight: bold;
+}
 .c-hamburger {
     display: block;
     position: relative;
