@@ -67,6 +67,7 @@ input#search_field {
 input#search_field:focus {
     background-color: #f1ff92;
     color: black;
+    box-shadow: 0 0 rgba(0, 0, 0, 0.2);
 }
 #message {
     border: 1px solid #eee;
@@ -206,6 +207,9 @@ input#search_field:focus {
     box-shadow: 0 4px rgba(0, 0, 0, 0.2);
     color: #ededed;
 }
+.il.save span:active,.il.prompt span:active{
+    box-shadow: 0 0 rgba(0, 0, 0, 0.2);
+}
 .il.decline span{
     background: #bd0012;
 
@@ -216,6 +220,9 @@ input#search_field:focus {
     box-shadow: 0 4px rgba(0, 0, 0, 0.2);
     color: #fff;
 }
+.il.decline span:active{
+    box-shadow: 0 0 rgba(0, 0, 0, 0.2);
+}
 .il.calc span{
     background: #9c89f6;
     box-shadow: 0 4px #6b54d3;
@@ -224,6 +231,11 @@ input#search_field:focus {
 .il.calc span:hover{
     background: #d6c3f6;
     box-shadow: 0 4px rgba(0, 0, 0, 0.3);
+    color: #333;
+}
+.il.calc span:active{
+    background: #d6c3f6;
+    box-shadow: 0 0 rgba(0, 0, 0, 0.3);
     color: #333;
 }
 

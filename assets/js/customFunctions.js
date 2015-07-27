@@ -466,7 +466,6 @@ for(var i = 0; i < keys.length; i++) {
 
 })();
 $('.c-hamburger').on('click',function(){
-    console.log('clcick')
     if($('.gutter').css('left') == '-400px'){
         $('.gutter').animate({"left":"0px"});
     }else{
