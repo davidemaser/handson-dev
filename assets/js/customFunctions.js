@@ -219,7 +219,6 @@ function loadData() {
         type: 'GET',
         success: function (res) {
             $("#testing").handsontable("loadData", res.data);
-            //$('.load-message').remove();
             $(eMessage).append('<div class="load-message new-atsave">Data loaded</div>');
             setTimeout("$('.load-message').focus();$('.load-message').removeClass('new-atsave')", 1500);
             updateScroll();
@@ -271,7 +270,8 @@ $('.save span').click(function(){
     saveData();
 });
 $('.load span').click(function(){
-    loadData();
+    //loadData();
+    genModal('Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose',loadData);
 });
 $('#sColHead').change(function(){
     if($(this).is(':checked')){
@@ -331,6 +331,29 @@ function updateScroll(){
     }
 })(jQuery);
 $('#calculator').drags();
+//modal
+function genModal(title,body,cta,call){
+    var structure = '<div class="modal message">';
+    structure += '<div class="modal content">';
+    structure += '<div class="modal title">'+title+'</div>';
+    structure += '<div class="modal body">'+body+'</div>';
+    if(cta == 'prompt'){
+        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>OK</span></div></div>';
+    }else if(cta == 'chose'){
+        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>YES</span></div><div class="il decline hm-refuse"><span>NO</span></div></div>';
+    }
+    structure += '</div>';
+    structure += '</div>';
+    $('body').prepend(structure);
+    $('.hm-accept').on('click',function(){
+        console.log('clicked');
+        call();
+        setTimeout("$('.modal.message').remove()",300);
+    });
+    $('.hm-refuse').on('click',function(){
+        $('.modal.message').remove();
+    })
+}
 // Get all the keys from document
 var keys = document.querySelectorAll('#calculator span');
 var operators = ['+', '-', 'x', '÷'];
