@@ -1,0 +1,360 @@
+body{
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+.customClass{
+    background-color: #00b359!important;
+    color:#fff!important;
+}
+.status_mess,.save-message {
+    background-color:transparent;
+    -webkit-transition: background-color 500ms linear;
+    -moz-transition: background-color 500ms linear;
+    -o-transition: background-color 500ms linear;
+    -ms-transition: background-color 500ms linear;
+    transition: background-color 500ms linear;
+}
+.new{
+    background-color: #eeeeee;
+}
+.new-atsave{
+    background-color: rgb(51, 255, 120);
+}
+.il {
+    display: inline-block;
+    margin-right: 10px;
+}
+.fr {
+    float:right;
+    margin-left: 10px;
+    margin-right: 0!important;
+}
+
+#dts-function {
+    margin: 10px;
+    padding: 10px;
+}
+input#search_field {
+    outline: none;
+    float: left;
+    position: relative;
+    top: 20px;
+    /* cursor: pointer; */
+    width: auto;
+    height: 36px;
+    background: #eeeeee;
+    border-radius: 3px;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+    margin: 0 7px 11px 0;
+    color: #888;
+    line-height: 36px;
+    padding: 0 10px;
+    /* text-align: center; */
+    user-select: none;
+    transition: all 0.2s ease;
+    border: none;
+}
+input#search_field:active {
+    background-color: #f1ff92;
+    color: black;
+}
+#message {
+    border: 1px solid #eee;
+    position: relative;
+    display: block;
+    padding: 20px;
+    margin: 20px;
+    height: 100px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+
+    /* Typography */
+    font-size: 17px;
+    line-height: 40px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-align: right;
+    letter-spacing: 1px;
+}
+#calculator {
+    display: none;
+    width: 325px;
+    height: auto;
+    margin: 100px auto;
+    padding: 20px 20px 9px;
+    background: #9dd2ea;
+    background: linear-gradient(#9dd2ea, #8bceec);
+    border-radius: 3px;
+    box-shadow: 0px 4px #009de4, 0px 10px 15px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 9999;
+    right: 50px;
+}
+
+/* Top portion */
+.top span.clear {
+    float: left;
+}
+
+/* Inset shadow on the screen to create indent */
+.top .screen {
+    height: 40px;
+    width: 158px;
+
+    float: right;
+
+    padding: 0 10px;
+
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+
+    /* Typography */
+    font-size: 17px;
+    line-height: 40px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-align: right;
+    letter-spacing: 1px;
+}
+
+/* Clear floats */
+.keys, .top {overflow: hidden;}
+
+/* Applying same to the keys */
+.keys span, .top span.clear {
+    float: left;
+    position: relative;
+    top: 0;
+    cursor: pointer;
+    width: 66px;
+    height: 36px;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+    margin: 0 7px 11px 0;
+    color: #888;
+    line-height: 36px;
+    text-align: center;
+    /* prevent selection of text inside keys */
+    user-select: none;
+    /* Smoothing out hover and active states using css3 transitions */
+    transition: all 0.2s ease;
+}
+.il span {
+    float: left;
+    position: relative;
+    top: 20px;
+    cursor: pointer;
+    width: auto;
+    height: 36px;
+    background: #eeeeee;
+    border-radius: 3px;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+    margin: 0 7px 11px 0;
+    color: #888;
+    line-height: 36px;
+    padding: 0 10px;
+    text-align: center;
+    /* prevent selection of text inside keys */
+    user-select: none;
+    /* Smoothing out hover and active states using css3 transitions */
+    transition: all 0.2s ease;
+}
+.il span:hover {
+    background: #9c89f6;
+    box-shadow: 0 4px #6b54d3;
+    color: white;
+}
+.il span:active {
+    box-shadow: 0 0 #6b54d3;
+    top: 4px;
+}
+/* Remove right margins from operator keys */
+/* style different type of keys (operators/evaluate/clear) differently */
+.keys span.operator {
+    background: #FFF0F5;
+    margin-right: 0;
+}
+
+.keys span.eval {
+    background: #f1ff92;
+    box-shadow: 0px 4px #9da853;
+    color: #888e5f;
+}
+
+.top span.clear {
+    background: #ff9fa8;
+    box-shadow: 0px 4px #ff7c87;
+    color: white;
+}
+
+/* Some hover effects */
+.keys span:hover {
+    background: #9c89f6;
+    box-shadow: 0px 4px #6b54d3;
+    color: white;
+}
+
+.keys span.eval:hover {
+    background: #abb850;
+    box-shadow: 0px 4px #717a33;
+    color: #ffffff;
+}
+
+.top span.clear:hover {
+    background: #f68991;
+    box-shadow: 0px 4px #d3545d;
+    color: white;
+}
+
+/* Simulating "pressed" effect on active state of the keys by removing the box-shadow and moving the keys down a bit */
+.keys span:active {
+    box-shadow: 0px 0px #6b54d3;
+    top: 4px;
+}
+
+.keys span.eval:active {
+    box-shadow: 0px 0px #717a33;
+    top: 4px;
+}
+
+.top span.clear:active {
+    top: 4px;
+    box-shadow: 0px 0px #d3545d;
+}
+.ios-toggle,
+.ios-toggle:active {
+    position: absolute;
+    top: -5000px;
+    height: 0;
+    width: 0;
+    opacity: 0;
+    border: none;
+    outline: none;
+}
+
+.checkbox-label {
+    display: block;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 16px;
+    /*width: 100%;
+    height: 36px;*/
+    /*border-radius*/
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    border-radius: 18px;
+    background: #f8f8f8;
+    cursor: pointer;
+    width: 50px;
+    height: 16px;
+}
+
+.checkbox-label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 1;
+    line-height: 34px;
+    text-indent: 40px;
+    height: 36px;
+    width: 36px;
+    /*border-radius*/
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    top: 0px;
+    left: 0px;
+    right: auto;
+    background: white;
+    /*box-shadow*/
+    -webkit-box-shadow: 0 3px 3px rgba(0,0,0,.2), 0 0 0 2px #dddddd;
+    -moz-box-shadow: 0 3px 3px rgba(0,0,0,.2), 0 0 0 2px #dddddd;
+    box-shadow: 0 3px 3px rgba(0,0,0,.2), 0 0 0 2px #dddddd;
+}
+
+.checkbox-label:after {
+    content: attr(data-off);
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: -300px;
+    padding: 10px;
+    height: 100%;
+    width: 300px;
+    text-align: right;
+    color: #bfbfbf;
+    white-space: nowrap;
+}
+
+.ios-toggle:checked + .checkbox-label {
+    /*box-shadow*/
+    -webkit-box-shadow: inset 0 0 0 20px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+    -moz-box-shadow: inset 0 0 0 20px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+    box-shadow: inset 0 0 0 20px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+}
+
+.ios-toggle:checked + .checkbox-label:before {
+    left: calc(100% - 36px);
+    /*box-shadow*/
+    -webkit-box-shadow: 0 0 0 2px transparent, 0 3px 3px rgba(0,0,0,.3);
+    -moz-box-shadow: 0 0 0 2px transparent, 0 3px 3px rgba(0,0,0,.3);
+    box-shadow: 0 0 0 2px transparent, 0 3px 3px rgba(0,0,0,.3);
+}
+
+.ios-toggle:checked + .checkbox-label:after {
+    content: attr(data-on);
+    left: 60px;
+    width: 36px;
+}
+#sRowHead + .checkbox-label {
+    /*box-shadow*/
+    -webkit-box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+    -moz-box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+    box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+}
+
+#sRowHead:checked + .checkbox-label {
+    /*box-shadow*/
+    -webkit-box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+    -moz-box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+    box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+}
+
+#sRowHead:checked + .checkbox-label:after { color: rgba(19,191,17,1); }
+#sColHead + .checkbox-label {
+    /*box-shadow*/
+    -webkit-box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+    -moz-box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+    box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+}
+
+#sColHead:checked + .checkbox-label {
+    /*box-shadow*/
+    -webkit-box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+    -moz-box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+    box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+}
+
+#sColHead:checked + .checkbox-label:after { color: rgba(19,191,17,1); }
+#autosave-feature + .checkbox-label {
+    /*box-shadow*/
+    -webkit-box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+    -moz-box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+    box-shadow: inset 0 0 0 0px rgba(19,191,17,1), 0 0 0 2px #dddddd;
+}
+
+#autosave-feature:checked + .checkbox-label {
+    /*box-shadow*/
+    -webkit-box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+    -moz-box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+    box-shadow: inset 0 0 0 18px rgba(19,191,17,1), 0 0 0 2px rgba(19,191,17,1);
+}
+
+#autosave-feature:checked + .checkbox-label:after { color: rgba(19,191,17,1); }

@@ -4,53 +4,41 @@
     <meta charset="UTF-8">
     <title>Handson Test</title>
     <script src="assets/js/jquery.min.js"></script>
-    <style type="text/css">
-        body{
-            margin: 0;
-            font-family: monospace;
-        }
-        .customClass{
-            background-color: #00b359!important;
-            color:#fff!important;
-        }
-        .status_mess,.save-message {
-            background-color:transparent;
-            -webkit-transition: background-color 500ms linear;
-            -moz-transition: background-color 500ms linear;
-            -o-transition: background-color 500ms linear;
-            -ms-transition: background-color 500ms linear;
-            transition: background-color 500ms linear;
-        }
-        .new{
-            background-color: #eeeeee;
-        }
-        .new-atsave{
-            background-color: rgba(2, 238, 51, 0.31);
-        }
-        .il {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        #dts-function {
-            margin: 10px;
-            padding: 10px;
-        }
-        #message {
-            border: 1px solid #eee;
-            position: relative;
-            display: block;
-            padding: 20px;
-            margin: 20px;
-            height: 100px;
-            overflow-y: auto;
-        }
-    </style>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/gen-style.css">
     <link rel="stylesheet" href="assets/css/handsontable.full.css">
     <!--<script src="assets/js/backbone.js"></script>-->
     <script src="assets/js/handsontable.full.js"></script>
 </head>
 <body>
+<div id="calculator" draggable="true" ondragstart="drag(event)">
+    <!-- Screen and clear key -->
+    <div class="top">
+        <span class="clear">C</span>
+        <span class="clear">CLOSE</span>
+        <div class="screen"></div>
+    </div>
+
+    <div class="keys">
+        <!-- operators and other keys -->
+        <span>7</span>
+        <span>8</span>
+        <span>9</span>
+        <span class="operator">+</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        <span class="operator">-</span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span class="operator">÷</span>
+        <span>0</span>
+        <span>.</span>
+        <span class="eval">=</span>
+        <span class="operator">x</span>
+    </div>
+</div>
 <div id="dts-function">
     <div class="il search"><input id="search_field" type="search" placeholder="Search..."></div>
     <div class="il options">
@@ -58,8 +46,11 @@
         <label for="sColHead"><input type="checkbox" id="sColHead" checked="checked" />Show Column Headers</label>
         </div>
     <div class="il autosave"><label for="autosave-feature"><input type="checkbox" id="autosave-feature" />Autosave</label></div>
-    <div class="il jump"><input type="text" placeholder="Go to row..." id="jump-to-row"/> </div>
-    <div class="il flush"><button>Flush activity log</button></div>
+    <!--<div class="il jump"><input type="text" placeholder="Go to row..." id="jump-to-row"/> </div>-->
+    <div class="il flush"><span>Flush activity log</span></div>
+    <div class="il calc"><span>Show Calculator</span></div>
+    <div class="il save fr"><span>Save Data</span></div>
+    <div class="il load fr"><span>Load Data</span></div>
 </div>
 
 <div id="message"></div>

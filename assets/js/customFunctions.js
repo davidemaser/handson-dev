@@ -39,21 +39,7 @@ $(eZone).handsontable({
         if(change){
             //save
             if($('#autosave-feature').is(':checked')) {
-                $.ajax({ //saves changes from Handsontable
-                    url: "assets/data/test2.json",
-                    dataType: "json",
-                    type: "POST",
-                    data: {"data": $("#testing").handsontable('getData')}, //returns full array of grid data
-                    //data: change, //contains only information about changed cells
-                    success: function (data) {
-                        $('#save-message').remove();
-                        $(eMessage).append('<div class="save-message new-atsave">Data Saved</div>');
-                        setTimeout("$('.save-message').focus();$('.save-message').removeClass('new-atsave')",1500);
-                    },
-                    error: function (data) {
-                        console.log("error", data);
-                    }
-                });
+                saveData();
             }
             //end save
             if(change.length>0)
@@ -162,14 +148,46 @@ $(eZone).handsontable({
 });
 var hot = $(eZone).handsontable('getInstance');
 
-$.ajax({
-    url: 'assets/data/test2.json',
-    dataType: 'json',
-    type: 'GET',
-    success: function(res){
-        $("#testing").handsontable("loadData", res.data);
-    }
-});
+function saveData() {
+    $.ajax({ //saves changes from Handsontable
+        url: "assets/data/test2.json",
+        dataType: "json",
+        type: "POST",
+        data: {"data": $("#testing").handsontable('getData')}, //returns full array of grid data
+        //data: change, //contains only information about changed cells
+        success: function (data) {
+            var d = new Date(),
+                dformat = [d.getMonth() + 1,
+                        d.getDate(),
+                        d.getFullYear()].join('/') + ' at ' +
+                    [d.getHours(),
+                        d.getMinutes(),
+                        d.getSeconds()].join(':');
+            $('.save-message').remove();
+            $(eMessage).append('<div class="save-message new-atsave">Data Saved on ' + dformat + '</div>');
+            setTimeout("$('.save-message').focus();$('.save-message').removeClass('new-atsave')", 1500);
+        },
+        error: function (data) {
+            console.log("error", data);
+        }
+    });
+}
+
+function loadData() {
+    $.ajax({
+        url: 'assets/data/test2.json',
+        dataType: 'json',
+        type: 'GET',
+        success: function (res) {
+            $("#testing").handsontable("loadData", res.data);
+            //$('.load-message').remove();
+            $(eMessage).append('<div class="load-message new-atsave">Data loaded</div>');
+            setTimeout("$('.load-message').focus();$('.load-message').removeClass('new-atsave')", 1500);
+        }
+    });
+}
+loadData();
+
 function onlyExactMatch(queryStr, value) {
     return queryStr.toString() === value.toString();
 }
@@ -178,11 +196,7 @@ Handsontable.Dom.addEvent(searchField, 'keyup', function (event) {
     var queryResult = hot.search.query(this.value);
     hot.render();
 });
-Handsontable.Dom.addEvent(jumpField, 'keyup', function (event) {
-    //var queryResult = hot.search.query(this.value);
-    var a = this.value.toString();
-    hot.selectCell(a, 0);
-});
+
 $('body').on( "click", ".status_mess", function() {
     var a = $(this).attr('data-row'),
         b = $(this).attr('data-column');
@@ -199,9 +213,25 @@ $('#sRowHead').change(function(){
         });
     }
 });
-$('.flush button').click(function(){
+$('.flush span').click(function(){
     dispMess = [];
     $(eMessage).empty();
+});
+$('.calc span').click(function(){
+    if($('#calculator').css('display') == 'none'){
+        $('#calculator').show();
+        $('.calc span').html('Hide Calculator');
+    }else{
+        $('#calculator').hide();
+        $('.calc span').html('Show Calculator');
+    }
+
+});
+$('.save span').click(function(){
+    saveData();
+});
+$('.load span').click(function(){
+    loadData();
 });
 $('#sColHead').change(function(){
     if($(this).is(':checked')){
@@ -214,3 +244,136 @@ $('#sColHead').change(function(){
         });
     }
 });
+//calculator code
+(function($) {
+    $.fn.drags = function(opt) {
+
+        opt = $.extend({handle:"",cursor:"move"}, opt);
+
+        if(opt.handle === "") {
+            var $el = this;
+        } else {
+            var $el = this.find(opt.handle);
+        }
+
+        return $el.css('cursor', opt.cursor).on("mousedown", function(e) {
+            if(opt.handle === "") {
+                var $drag = $(this).addClass('draggable');
+            } else {
+                var $drag = $(this).addClass('active-handle').parent().addClass('draggable');
+            }
+            var z_idx = $drag.css('z-index'),
+                drg_h = $drag.outerHeight(),
+                drg_w = $drag.outerWidth(),
+                pos_y = $drag.offset().top + drg_h - e.pageY,
+                pos_x = $drag.offset().left + drg_w - e.pageX;
+            $drag.css('z-index', 1000).parents().on("mousemove", function(e) {
+                $('.draggable').offset({
+                    top:e.pageY + pos_y - drg_h,
+                    left:e.pageX + pos_x - drg_w
+                }).on("mouseup", function() {
+                    $(this).removeClass('draggable').css('z-index', z_idx);
+                });
+            });
+            e.preventDefault(); // disable selection
+        }).on("mouseup", function() {
+            if(opt.handle === "") {
+                $(this).removeClass('draggable');
+            } else {
+                $(this).removeClass('active-handle').parent().removeClass('draggable');
+            }
+        });
+
+    }
+})(jQuery);
+$('#calculator').drags();
+// Get all the keys from document
+var keys = document.querySelectorAll('#calculator span');
+var operators = ['+', '-', 'x', '÷'];
+var decimalAdded = false;
+
+// Add onclick event to all the keys and perform operations
+for(var i = 0; i < keys.length; i++) {
+    keys[i].onclick = function(e) {
+        // Get the input and button values
+        var input = document.querySelector('.screen');
+        var inputVal = input.innerHTML;
+        var btnVal = this.innerHTML;
+
+        // Now, just append the key values (btnValue) to the input string and finally use javascript's eval function to get the result
+        // If clear key is pressed, erase everything
+        if(btnVal == 'C') {
+            input.innerHTML = '';
+            decimalAdded = false;
+        }
+        if(btnVal == 'CLOSE') {
+            input.innerHTML = '';
+            $('#calculator').hide();
+            $('.calc span').html('Show Calculator');
+        }
+
+        // If eval key is pressed, calculate and display the result
+        else if(btnVal == '=') {
+            var equation = inputVal;
+            var lastChar = equation[equation.length - 1];
+
+            // Replace all instances of x and ÷ with * and / respectively. This can be done easily using regex and the 'g' tag which will replace all instances of the matched character/substring
+            equation = equation.replace(/x/g, '*').replace(/÷/g, '/');
+
+            // Final thing left to do is checking the last character of the equation. If it's an operator or a decimal, remove it
+            if(operators.indexOf(lastChar) > -1 || lastChar == '.')
+                equation = equation.replace(/.$/, '');
+
+            if(equation)
+                input.innerHTML = eval(equation);
+
+            decimalAdded = false;
+        }
+
+        // Basic functionality of the calculator is complete. But there are some problems like
+        // 1. No two operators should be added consecutively.
+        // 2. The equation shouldn't start from an operator except minus
+        // 3. not more than 1 decimal should be there in a number
+
+        // We'll fix these issues using some simple checks
+
+        // indexOf works only in IE9+
+        else if(operators.indexOf(btnVal) > -1) {
+            // Operator is clicked
+            // Get the last character from the equation
+            var lastChar = inputVal[inputVal.length - 1];
+
+            // Only add operator if input is not empty and there is no operator at the last
+            if(inputVal != '' && operators.indexOf(lastChar) == -1)
+                input.innerHTML += btnVal;
+
+            // Allow minus if the string is empty
+            else if(inputVal == '' && btnVal == '-')
+                input.innerHTML += btnVal;
+
+            // Replace the last operator (if exists) with the newly pressed operator
+            if(operators.indexOf(lastChar) > -1 && inputVal.length > 1) {
+                // Here, '.' matches any character while $ denotes the end of string, so anything (will be an operator in this case) at the end of string will get replaced by new operator
+                input.innerHTML = inputVal.replace(/.$/, btnVal);
+            }
+
+            decimalAdded =false;
+        }
+
+        // Now only the decimal problem is left. We can solve it easily using a flag 'decimalAdded' which we'll set once the decimal is added and prevent more decimals to be added once it's set. It will be reset when an operator, eval or clear key is pressed.
+        else if(btnVal == '.') {
+            if(!decimalAdded) {
+                input.innerHTML += btnVal;
+                decimalAdded = true;
+            }
+        }
+
+        // if any other key is pressed, just append it
+        else {
+            input.innerHTML += btnVal;
+        }
+
+        // prevent page jumps
+        e.preventDefault();
+    }
+}
