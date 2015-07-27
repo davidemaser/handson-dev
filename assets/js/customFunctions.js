@@ -33,6 +33,7 @@ $(eZone).handsontable({
     manualColumnFreeze: true,
     manualColumnResize: true,
     manualRowResize: true,
+    minSpareRows: 10,
     //groups: true,
     afterChange: function (change, source) {
         $(eMessage).empty();
@@ -57,6 +58,7 @@ $(eZone).handsontable({
                         $(eMessage).append('<div class="status_mess num'+[j]+' new" data-column="'+dispCol[j]+'" data-row="'+dispRow[j]+'">'+dispMess[j]+'<div>');
                         $('#message div:last-child').focus();
                         $('#message div:last-child').removeClass('new');
+                        updateScroll();
                     }
                 }
         }
@@ -156,16 +158,53 @@ function saveData() {
         data: {"data": $("#testing").handsontable('getData')}, //returns full array of grid data
         //data: change, //contains only information about changed cells
         success: function (data) {
+            Date.prototype.getMinutesTwoDigits = function()
+            {
+                var retval = this.getMinutes();
+                if (retval < 10)
+                {
+                    return ("0" + retval.toString());
+                }
+                else
+                {
+                    return retval.toString();
+                }
+            }
+            Date.prototype.getHoursTwoDigits = function()
+            {
+                var retval = this.getHours();
+                if (retval < 10)
+                {
+                    return ("0" + retval.toString());
+                }
+                else
+                {
+                    return retval.toString();
+                }
+            }
+            Date.prototype.getSecondsTwoDigits = function()
+            {
+                var retval = this.getSeconds();
+                if (retval < 10)
+                {
+                    return ("0" + retval.toString());
+                }
+                else
+                {
+                    return retval.toString();
+                }
+            }
             var d = new Date(),
                 dformat = [d.getMonth() + 1,
                         d.getDate(),
                         d.getFullYear()].join('/') + ' at ' +
-                    [d.getHours(),
-                        d.getMinutes(),
-                        d.getSeconds()].join(':');
+                    [d.getHoursTwoDigits(),
+                        d.getMinutesTwoDigits(),
+                        d.getSecondsTwoDigits()].join(':');
             $('.save-message').remove();
             $(eMessage).append('<div class="save-message new-atsave">Data Saved on ' + dformat + '</div>');
             setTimeout("$('.save-message').focus();$('.save-message').removeClass('new-atsave')", 1500);
+            updateScroll();
         },
         error: function (data) {
             console.log("error", data);
@@ -183,6 +222,7 @@ function loadData() {
             //$('.load-message').remove();
             $(eMessage).append('<div class="load-message new-atsave">Data loaded</div>');
             setTimeout("$('.load-message').focus();$('.load-message').removeClass('new-atsave')", 1500);
+            updateScroll();
         }
     });
 }
@@ -244,6 +284,10 @@ $('#sColHead').change(function(){
         });
     }
 });
+function updateScroll(){
+    var element = document.getElementById("message");
+    element.scrollTop = element.scrollHeight;
+}
 //calculator code
 (function($) {
     $.fn.drags = function(opt) {

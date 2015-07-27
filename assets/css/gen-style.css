@@ -3,10 +3,11 @@ body{
     font-family: 'Quicksand', sans-serif;
 }
 .customClass{
-    background-color: #00b359!important;
+    background-color: #009688!important;
     color:#fff!important;
 }
-.status_mess,.save-message {
+.status_mess,.save-message,.load-message {
+    padding: 0 10px;
     background-color:transparent;
     -webkit-transition: background-color 500ms linear;
     -moz-transition: background-color 500ms linear;
@@ -53,6 +54,8 @@ input#search_field {
     user-select: none;
     transition: all 0.2s ease;
     border: none;
+    font-family: inherit;
+    font-size: inherit;
 }
 input#search_field:focus {
     background-color: #f1ff92;
@@ -62,7 +65,7 @@ input#search_field:focus {
     border: 1px solid #eee;
     position: relative;
     display: block;
-    padding: 20px;
+    padding: 20px 0;
     margin: 20px;
     height: 100px;
     overflow-y: auto;
@@ -164,6 +167,25 @@ input#search_field:focus {
     /* Smoothing out hover and active states using css3 transitions */
     transition: all 0.2s ease;
 }
+.il.save span{
+    background-color: #97F298;
+}
+.il.save span:hover{
+    background-color: #00bd00;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+    color: #ededed;
+}
+.il.calc span{
+    background: #9c89f6;
+    box-shadow: 0 4px #6b54d3;
+    color: white;
+}
+.il.calc span:hover{
+    background: #d6c3f6;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.3);
+    color: #333;
+}
+
 .il span:hover {
     background: #9c89f6;
     box-shadow: 0 4px #6b54d3;
@@ -243,7 +265,7 @@ input[type="checkbox"]:before {
      z-index: 1;
      width: 1rem;
      height: 1rem;
-     border: 2px solid #f2f2f2;
+     border: 2px solid #dddddd;
  }
 input[type="checkbox"]:checked:before {
     -webkit-transform: rotate(-45deg);
