@@ -552,6 +552,12 @@ function locStor(method,elem,value){
             localStorage.setItem(elem, value);
         }else if(method == 'get') {
             return localStorage.getItem(elem);
+        }else if(method == 'scan') {
+            //check and store all localStorage objects
+            var archive = [];
+            for (var a in localStorage) {
+                archive.push(a+' = '+localStorage[a]);
+            }
         }
     } else {
         alert('Browser is not up to date');
