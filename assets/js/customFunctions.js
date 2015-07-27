@@ -271,7 +271,7 @@ $('.save span').click(function(){
 });
 $('.load span').click(function(){
     //loadData();
-    genModal('Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose',loadData);
+    genModal('Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose','YES::NO',loadData);
 });
 $('#sColHead').change(function(){
     if($(this).is(':checked')){
@@ -332,21 +332,23 @@ function updateScroll(){
 })(jQuery);
 $('#calculator').drags();
 //modal
-function genModal(title,body,cta,call){
+function genModal(title,body,cta,labels,call){
+    var a = labels.split('::'),
+        b = a[0],
+        c = a[1];
     var structure = '<div class="modal message">';
     structure += '<div class="modal content">';
     structure += '<div class="modal title">'+title+'</div>';
     structure += '<div class="modal body">'+body+'</div>';
     if(cta == 'prompt'){
-        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>OK</span></div></div>';
+        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>'+b+'</span></div></div>';
     }else if(cta == 'chose'){
-        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>YES</span></div><div class="il decline hm-refuse"><span>NO</span></div></div>';
+        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>'+b+'</span></div><div class="il decline hm-refuse"><span>'+c+'</span></div></div>';
     }
     structure += '</div>';
     structure += '</div>';
     $('body').prepend(structure);
     $('.hm-accept').on('click',function(){
-        console.log('clicked');
         call();
         setTimeout("$('.modal.message').remove()",300);
     });

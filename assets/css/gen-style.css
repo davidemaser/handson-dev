@@ -32,8 +32,8 @@ body{
 }
 
 #dts-function {
-    margin: 10px;
-    padding: 10px;
+    margin: 0 10px;
+    padding: 0 10px;
 }
 input#search_field {
     outline: none;
