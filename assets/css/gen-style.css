@@ -2,6 +2,9 @@ body{
     margin: 0;
     font-family: 'Quicksand', sans-serif;
 }
+#testing{
+    height:auto!important;
+}
 .customClass{
     background-color: #009688!important;
     color:#fff!important;
@@ -113,16 +116,12 @@ input#search_field:focus {
 /* Inset shadow on the screen to create indent */
 .top .screen {
     height: 40px;
-    width: 158px;
-
-    float: right;
-
+    width: 138px;
+    float: left;
     padding: 0 10px;
-
     background: rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
-
     /* Typography */
     font-size: 17px;
     line-height: 40px;
@@ -408,7 +407,7 @@ input[type="checkbox"]:after {
 .gutter-title {
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 34px;
     /*border-bottom: 3px solid rgba(255, 255, 255, 0.3);*/
     margin-left: -10px;
     padding-left: 20px;

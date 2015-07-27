@@ -271,7 +271,7 @@ $('.save span').click(function(){
 });
 $('.load span').click(function(){
     //loadData();
-    genModal('Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose','YES::NO',loadData);
+    genModal('mod',null,'Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose','YES::NO',loadData);
 });
 $('#sColHead').change(function(){
     if($(this).is(':checked')){
@@ -332,14 +332,28 @@ function updateScroll(){
 })(jQuery);
 $('#calculator').drags();
 //modal
-function genModal(title,body,cta,labels,call){
+function genModal(type,fData,title,body,cta,labels,call){
     var a = labels.split('::'),
         b = a[0],
         c = a[1];
+    if(type == 'form'){
+        var gen = '<div class="bi-form">',
+            fdx = fData.split('::'),
+            fdl = fdx.length;
+        for(i=0;i<fdl;i++){
+            gen += '<div class="bi-form-line">'+fdx[i]+'</div>';
+        }
+        gen += '</div>';
+
+    }
     var structure = '<div class="modal message">';
     structure += '<div class="modal content">';
     structure += '<div class="modal title">'+title+'</div>';
-    structure += '<div class="modal body">'+body+'</div>';
+    if(type == 'form') {
+        structure += '<div class="modal body">' + gen + '</div>';
+    }else{
+        structure += '<div class="modal body">' + body + '</div>';
+    }
     if(cta == 'prompt'){
         structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>'+b+'</span></div></div>';
     }else if(cta == 'chose'){
@@ -349,7 +363,9 @@ function genModal(title,body,cta,labels,call){
     structure += '</div>';
     $('body').prepend(structure);
     $('.hm-accept').on('click',function(){
-        call();
+        if(call !== null) {
+            call();
+        }
         setTimeout("$('.modal.message').remove()",300);
     });
     $('.hm-refuse').on('click',function(){
@@ -471,10 +487,76 @@ $('.c-hamburger').on('click',function(){
             {left:0},
             600
         );
+        $('.rl.trigger').animate(
+            {left:320},
+            600
+        );
     }else{
         $('.gutter').animate(
             {left:-400},
             300
         );
+        $('.rl.trigger').animate(
+            {left:420},
+            500
+        );
     }
 });
+$('.gutter-settings').click(function(){
+    var log = locStor('get','PIMsetting-log',null);
+    if(log == 'true' || log == null){
+        var logLabel = 'checked';
+    }else{
+        logLabel = '';
+    }
+    genModal('form','<label for="toggle-log">Toggle Log<input type="checkbox" id="toggle-log" '+logLabel+'></label>','Settings',null,'prompt','CLOSE::NO',null);
+});
+$('body').on('change', 'input[type="checkbox"]', function() {
+    var a = $(this).attr('id');
+    switch(a){
+        case 'toggle-log':
+            if($('#toggle-log').is(':checked')){
+                $('#message').show();
+                locStor('set','PIMsetting-log',true)
+            }else{
+                $('#message').hide();
+                locStor('set','PIMsetting-log',false)
+            }
+            break;
+        case 'sRowHead':
+            if($('#sRowHead').is(':checked')){
+                locStor('set','PIMsetting-rows',true)
+            }else{
+                locStor('set','PIMsetting-rows',false)
+            }
+            break;
+        case 'sColHead':
+            if($('#sColHead').is(':checked')){
+                locStor('set','PIMsetting-cols',true)
+            }else{
+                locStor('set','PIMsetting-cols',false)
+            }
+            break;
+        case 'autosave-feature':
+            if($('#autosave-feature').is(':checked')){
+                locStor('set','PIMsetting-autosave',true)
+            }else{
+                locStor('set','PIMsetting-autosave',false)
+            }
+            break;
+    }
+});
+function locStor(method,elem,value){
+    if(typeof(Storage) !== "undefined") {
+        if(method == 'set') {
+            localStorage.setItem(elem, value);
+        }else if(method == 'get') {
+            return localStorage.getItem(elem);
+        }
+    } else {
+        alert('Browser is not up to date');
+    }
+}
+function checkSettings(){
+    var settings = ['log','rows','cols','autosave','reset','disconnect','warn','mobile','ortho'];
+}

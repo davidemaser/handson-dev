@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c00e948e-7fb4-43e3-9d7c-8765cd7d8e3f" name="Default" comment="UI Styling">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/bootstrap/fonts/glyphicons-halflings-regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/bootstrap/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/bootstrap/fonts/glyphicons-halflings-regular.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/bootstrap/fonts/glyphicons-halflings-regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/bootstrap/css/bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/bootstrap/fonts/glyphicons-halflings-regular.svg" />
+    <list default="true" id="c00e948e-7fb4-43e3-9d7c-8765cd7d8e3f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/customFunctions.js" afterPath="$PROJECT_DIR$/assets/js/customFunctions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dropdown.html" afterPath="$PROJECT_DIR$/dropdown.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/gen-style.css" afterPath="$PROJECT_DIR$/assets/css/gen-style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -37,8 +32,8 @@
       <file leaf-file-name="dropdown.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dropdown.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.666667" vertical-offset="108" max-vertical-offset="1530">
-              <caret line="25" column="129" selection-start-line="25" selection-start-column="129" selection-end-line="25" selection-end-column="129" />
+            <state vertical-scroll-proportion="-14.037037" vertical-offset="953" max-vertical-offset="1530">
+              <caret line="74" column="16" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="16" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#div#1;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -46,21 +41,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="customFunctions.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="customFunctions.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/customFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.133333" vertical-offset="8084" max-vertical-offset="8748">
-              <caret line="456" column="30" selection-start-line="456" selection-start-column="30" selection-end-line="456" selection-end-column="30" />
+            <state vertical-scroll-proportion="-0.09756097" vertical-offset="9632" max-vertical-offset="10206">
+              <caret line="532" column="24" selection-start-line="532" selection-start-column="24" selection-end-line="532" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gen-style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gen-style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/css/gen-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14139694" vertical-offset="7477" max-vertical-offset="9900">
-              <caret line="420" column="14" selection-start-line="420" selection-start-column="14" selection-end-line="420" selection-end-column="14" />
+            <state vertical-scroll-proportion="-4.8" vertical-offset="0" max-vertical-offset="9882">
+              <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -69,8 +64,8 @@
       <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/bootstrap/css/bootstrap.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="14444" max-vertical-offset="15048">
-              <caret line="820" column="19" selection-start-line="820" selection-start-column="19" selection-end-line="820" selection-end-column="19" />
+            <state vertical-scroll-proportion="-9.933333" vertical-offset="14444" max-vertical-offset="15048">
+              <caret line="819" column="3" selection-start-line="819" selection-start-column="3" selection-end-line="819" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -95,10 +90,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/assets/js/customFunctions.js" />
         <option value="$PROJECT_DIR$/assets/bootstrap/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/assets/css/gen-style.css" />
         <option value="$PROJECT_DIR$/dropdown.html" />
+        <option value="$PROJECT_DIR$/assets/css/gen-style.css" />
+        <option value="$PROJECT_DIR$/assets/js/customFunctions.js" />
       </list>
     </option>
   </component>
@@ -190,29 +185,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HANDSON" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HANDSON" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -436,12 +409,18 @@
       <option name="project" value="LOCAL" />
       <updated>1438026062242</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Bootstrap">
+      <created>1438028333369</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1438028333369</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1920" height="1084" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -496,7 +475,8 @@
     <MESSAGE value="UI styling" />
     <MESSAGE value="Modal CTAs" />
     <MESSAGE value="UI Styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="UI Styling" />
+    <MESSAGE value="Bootstrap" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bootstrap" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -768,14 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/customFunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.133333" vertical-offset="8084" max-vertical-offset="8748">
-          <caret line="456" column="30" selection-start-line="456" selection-start-column="30" selection-end-line="456" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/bootstrap/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="604">
@@ -786,16 +758,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/bootstrap/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="14444" max-vertical-offset="15048">
-          <caret line="820" column="19" selection-start-line="820" selection-start-column="19" selection-end-line="820" selection-end-column="19" />
+        <state vertical-scroll-proportion="-9.933333" vertical-offset="14444" max-vertical-offset="15048">
+          <caret line="819" column="3" selection-start-line="819" selection-start-column="3" selection-end-line="819" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dropdown.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.666667" vertical-offset="108" max-vertical-offset="1530">
-          <caret line="25" column="129" selection-start-line="25" selection-start-column="129" selection-end-line="25" selection-end-column="129" />
+        <state vertical-scroll-proportion="-14.037037" vertical-offset="953" max-vertical-offset="1530">
+          <caret line="74" column="16" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="16" />
           <folding>
             <element signature="n#style#0;n#span#0;n#div#1;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
@@ -804,8 +776,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/gen-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14139694" vertical-offset="7477" max-vertical-offset="9900">
-          <caret line="420" column="14" selection-start-line="420" selection-start-column="14" selection-end-line="420" selection-end-column="14" />
+        <state vertical-scroll-proportion="-4.8" vertical-offset="0" max-vertical-offset="9882">
+          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/customFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.09756097" vertical-offset="9632" max-vertical-offset="10206">
+          <caret line="532" column="24" selection-start-line="532" selection-start-column="24" selection-end-line="532" selection-end-column="24" />
           <folding />
         </state>
       </provider>
