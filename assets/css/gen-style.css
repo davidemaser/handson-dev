@@ -414,11 +414,10 @@ input[type="checkbox"]:after {
     font-weight: bold;
     font-size: 34px;
     /*border-bottom: 3px solid rgba(255, 255, 255, 0.3);*/
-    margin-left: -10px;
     padding-left: 20px;
     padding-bottom: 10px;
-    margin-right: -10px;
     text-shadow: 1px 1px rgba(255, 255, 255, 0.3);
+    margin: 0 -10px 40px -10px;
 }
 .gutter-settings {
     position: absolute;
@@ -428,6 +427,28 @@ input[type="checkbox"]:after {
     background-color: rgba(0, 0, 0, 0.25);
     overflow: hidden;
     cursor: pointer;
+}
+.gutter-settings:hover {
+    background-color: rgba(255, 255, 255, 0.91);
+}
+.gutter-button:hover {
+    box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.19);
+    border-bottom:none;
+}
+.gutter-button:hover:after {
+    content:"-->";
+    position:absolute;
+    right  :30px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.gutter-button {
+    margin: 0 -10px 0 -10px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .settings-text {

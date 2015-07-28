@@ -216,6 +216,22 @@ function saveData() {
     });
 }
 
+function hackedSplice(index, howMany /* model1, ... modelN */) {
+    var args = _.toArray(arguments).slice(2).concat({at: index}),
+        removed = this.models.slice(index, index + howMany);
+
+    this.remove(removed).add.apply(this, args);
+
+    return removed;
+}function hackedSplice(index, howMany /* model1, ... modelN */) {
+    var args = _.toArray(arguments).slice(2).concat({at: index}),
+        removed = this.models.slice(index, index + howMany);
+
+    this.remove(removed).add.apply(this, args);
+
+    return removed;
+}
+
 function loadData() {
     $.ajax({
         url: 'assets/data/test2.json',
