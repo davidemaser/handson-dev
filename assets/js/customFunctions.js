@@ -18,7 +18,7 @@ var calculateSize = function () {
     availableWidth = $window.width() - offset.left + $window.scrollLeft();
     availableHeight = $window.height() - offset.top + $window.scrollTop();
 };
-$window.on('resize', calculateSize);
+
 var dispMess = [],
     dispRow = [],
     dispCol = [];
@@ -432,16 +432,20 @@ function genModal(type,fData,title,body,cta,labels,call){
                 drg_w = $drag.outerWidth(),
                 pos_y = $drag.offset().top + drg_h - e.pageY,
                 pos_x = $drag.offset().left + drg_w - e.pageX;
+
             $drag.css('z-index', 1000).parents().on("mousemove", function(e) {
                 $('.draggable').offset({
                     top:e.pageY + pos_y - drg_h,
                     left:e.pageX + pos_x - drg_w
                 }).on("mouseup", function() {
                     $(this).removeClass('draggable').css('z-index', z_idx);
+
                 });
             });
             e.preventDefault(); // disable selection
         }).on("mouseup", function() {
+            locStor('set','PIMsetting-calctop',$('#calculator').offset().top);
+            locStor('set','PIMsetting-calcleft',$('#calculator').offset().left);
             if(opt.handle === "") {
                 $(this).removeClass('draggable');
             } else {
@@ -495,14 +499,6 @@ for(var i = 0; i < keys.length; i++) {
             decimalAdded = false;
         }
 
-        // Basic functionality of the calculator is complete. But there are some problems like
-        // 1. No two operators should be added consecutively.
-        // 2. The equation shouldn't start from an operator except minus
-        // 3. not more than 1 decimal should be there in a number
-
-        // We'll fix these issues using some simple checks
-
-        // indexOf works only in IE9+
         else if(operators.indexOf(btnVal) > -1) {
             // Operator is clicked
             // Get the last character from the equation
@@ -675,6 +671,7 @@ $('body').on('change', 'input[type="checkbox"],input#paginate-line', function() 
             break;
     }
 });
+$window.on('resize', calculateSize);
 Handsontable.Dom.addEvent(searchField, 'keyup', function (event) {
     var queryResult = hot.search.query(this.value);
     hot.render();

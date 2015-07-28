@@ -111,7 +111,8 @@ input{
   position: absolute;
   z-index: 9999;
   right: 50px;
-  top:50%;
+  top: -30px;
+  left: -514px;
 }
 .top {
   span.clear {
@@ -467,11 +468,6 @@ input[type="checkbox"] {
     bottom: 20px;
     z-index: 999;
     width: 100%;
-    opacity: 0.3;
-    transition: opacity .5s ease-in-out;
-    &:hover{
-      opacity: 1;
-    }
   }
   &-set {
     width: 500px;
@@ -482,6 +478,11 @@ input[type="checkbox"] {
     padding: 20px 0 10px;
     border-radius: 5px;
     box-shadow: 4px 4px 50px rgba(0,0,0,0.2);
+    opacity: 0.3;
+    transition: opacity .5s ease-in-out;
+    &:hover{
+      opacity: 1;
+    }
   }
   &-unit {
     display: inline-block;
