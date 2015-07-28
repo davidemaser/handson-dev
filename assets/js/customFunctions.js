@@ -10,7 +10,8 @@ var first,
     , eZone = $('#testing')
     , searchField = document.getElementById('search_field')
     , jumpField = document.getElementById('jump-to-row')
-    , eMessage = $('#message');
+    , eMessage = $('#message')
+    , paginateDefault = parseInt(locStor('get','PIMsetting-paginate',null) || 20);
 
 var calculateSize = function () {
     var offset = eZone.offset();
@@ -33,7 +34,7 @@ $(eZone).handsontable({
     manualColumnFreeze: true,
     manualColumnResize: true,
     manualRowResize: true,
-    minSpareRows: 10,
+    minSpareRows: 2,
     //groups: true,
     afterChange: function (change, source) {
         $(eMessage).empty();
@@ -153,7 +154,6 @@ $(eZone).handsontable({
     }
 });
 var hot = $(eZone).handsontable('getInstance');
-
 function saveData() {
     $.ajax({ //saves changes from Handsontable
         url: "assets/data/test2.json",
@@ -173,7 +173,7 @@ function saveData() {
                 {
                     return retval.toString();
                 }
-            }
+            };
             Date.prototype.getHoursTwoDigits = function()
             {
                 var retval = this.getHours();
@@ -185,7 +185,7 @@ function saveData() {
                 {
                     return retval.toString();
                 }
-            }
+            };
             Date.prototype.getSecondsTwoDigits = function()
             {
                 var retval = this.getSeconds();
@@ -197,7 +197,7 @@ function saveData() {
                 {
                     return retval.toString();
                 }
-            }
+            };
             var d = new Date(),
                 dformat = [d.getMonth() + 1,
                         d.getDate(),
@@ -215,7 +215,6 @@ function saveData() {
         }
     });
 }
-
 function hackedSplice(index, howMany /* model1, ... modelN */) {
     var args = _.toArray(arguments).slice(2).concat({at: index}),
         removed = this.models.slice(index, index + howMany);
@@ -223,70 +222,192 @@ function hackedSplice(index, howMany /* model1, ... modelN */) {
     this.remove(removed).add.apply(this, args);
 
     return removed;
-}function hackedSplice(index, howMany /* model1, ... modelN */) {
-    var args = _.toArray(arguments).slice(2).concat({at: index}),
-        removed = this.models.slice(index, index + howMany);
-
-    this.remove(removed).add.apply(this, args);
-
-    return removed;
 }
-
-function loadData() {
+function loadData(idr,reset) {
     $.ajax({
         url: 'assets/data/test2.json',
         dataType: 'json',
         type: 'GET',
         success: function (res) {
-            $("#testing").handsontable("loadData", res.data);
+            var page  = parseInt(window.location.hash.replace('#', ''), 10) || 1,
+                limit = idr,
+                row   = (page - 1) * limit,
+                count = page * limit,
+                apo = [],
+                len = Math.round(res.data.length/limit)+1;
+            for (;row < count;row++) {
+                apo.push(res.data[row]);
+            }
+            $("#testing").handsontable("loadData", apo);
+            if(reset == true){
+                initPagination(1, limit, len);
+            }
             $(eMessage).append('<div class="load-message new-atsave">Data loaded</div>');
             setTimeout("$('.load-message').focus();$('.load-message').removeClass('new-atsave')", 1500);
             updateScroll();
+            if(page > len){
+                window.location.hash = "1";
+            }
         }
     });
 }
-loadData();
+loadData(parseInt(locStor('get','PIMsetting-paginate',null) || 20),true);
 
 function onlyExactMatch(queryStr, value) {
     return queryStr.toString() === value.toString();
 }
-
-Handsontable.Dom.addEvent(searchField, 'keyup', function (event) {
-    var queryResult = hot.search.query(this.value);
-    hot.render();
-});
-
-$('body').on( "click", ".status_mess", function() {
-    var a = $(this).attr('data-row'),
-        b = $(this).attr('data-column');
-    hot.selectCell(a,b);
-});
-
-$('.flush span').click(function(){
-    dispMess = [];
-    $(eMessage).empty();
-});
-$('.calc span').click(function(){
-    if($('#calculator').css('display') == 'none'){
-        $('#calculator').show();
-        $('.calc span').html('Hide Calculator');
-    }else{
-        $('#calculator').hide();
-        $('.calc span').html('Show Calculator');
-    }
-
-});
-$('.save span').click(function(){
-    saveData();
-});
-$('.load span').click(function(){
-    //loadData();
-    genModal('mod',null,'Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose','YES::NO',loadData);
-});
-
 function updateScroll(){
     var element = document.getElementById("message");
     element.scrollTop = element.scrollHeight;
+}
+function locStor(method,elem,value){
+    if(typeof(Storage) !== "undefined") {
+        if(method == 'set') {
+            localStorage.setItem(elem, value);
+        }else if(method == 'get') {
+            return localStorage.getItem(elem);
+        }else if(method == 'push') {
+            for (var a in localStorage) {
+                initSettings(a,localStorage[a]);
+            }
+        }
+    } else {
+        alert('Browser is not up to date');
+    }
+}
+function initPagination(min,max,units){
+    $('.paginate-holder').remove();
+    var currentEL = window.location.hash.replace('#','') || 1,
+        markup = '<div class="paginate-holder">';
+    markup += '<div class="paginate-set" data-min="'+min+'" data-max="'+max+'">';
+    for(i=1;i<units;i++) {
+        markup += '<div class="paginate-unit';
+        if(currentEL == i){
+            markup += ' current-page';
+        }
+        markup += '" data-unit="'+[i]+'">'+[i]+'</div>';
+    }
+    markup += '</div></div>';
+    $('body').append(markup);
+    $('body').on('click','.paginate-unit',function(){
+        var a = $(this).attr('data-unit');
+        window.location.hash = a;
+    })
+
+}
+function initSettings(item,value){
+    var initItem = item.replace('PIMsetting-','');
+    var initElem = 'toggle-';
+    switch(initItem){
+        case 'log':
+            if(value == 'true') {
+                $('#'+initElem+'log').prop('checked', true);
+                $('#message').show();
+            }else {
+                $('#'+initElem+'log').prop('checked', false);
+                $('#message').hide();
+            }
+            break;
+        case 'row':
+            if(value == 'true') {
+                $('#'+initElem+'row').prop('checked', true);
+                hot.updateSettings({
+                    rowHeaders: true
+                });
+            }else{
+                $('#'+initElem+'row').prop('checked', false);
+                hot.updateSettings({
+                    rowHeaders: false
+                });
+            }
+            break;
+        case 'col':
+            if(value == 'true') {
+                $('#'+initElem+'col').prop('checked', true);
+                hot.updateSettings({
+                    colHeaders: true
+                });
+            }else{
+                $('#'+initElem+'col').prop('checked', false);
+                hot.updateSettings({
+                    colHeaders: false
+                });
+            }
+            break;
+        case 'autosave':
+            if(value == 'true') {
+                $('#'+initElem+'autosave').prop('checked', true);
+            }else{
+                $('#'+initElem+'autosave').prop('checked',false);
+            }
+            break;
+    }
+}
+function gutterToggle(){
+    if($('.gutter').css('left') == '-400px'){
+        $('.gutter').animate(
+            {left:0},
+            600
+        );
+        $('.rl.trigger').animate(
+            {left:320},
+            600
+        );
+    }else{
+        $('.gutter').animate(
+            {left:-400},
+            300
+        );
+        $('.rl.trigger').animate(
+            {left:420},
+            500
+        );
+    }
+}
+//modal
+function genModal(type,fData,title,body,cta,labels,call){
+    var a = labels.split('::'),
+        b = a[0],
+        c = a[1];
+    if(type == 'form'){
+        var gen = '<div class="bi-form">',
+            fdx = fData.split('::'),
+            fdl = fdx.length;
+        for(i=0;i<fdl;i++){
+            gen += '<div class="bi-form-line">'+fdx[i]+'</div>';
+        }
+        gen += '</div>';
+
+    }
+    var structure = '<div class="modal message">';
+    structure += '<div class="modal content">';
+    structure += '<div class="modal title">'+title+'</div>';
+    if(type == 'form') {
+        structure += '<div class="modal body">' + gen + '</div>';
+    }else{
+        structure += '<div class="modal body">' + body + '</div>';
+    }
+    if(cta == 'prompt'){
+        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>'+b+'</span></div></div>';
+    }else if(cta == 'chose'){
+        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>'+b+'</span></div><div class="il decline hm-refuse"><span>'+c+'</span></div></div>';
+    }
+    structure += '</div>';
+    structure += '</div>';
+    $('body').prepend(structure);
+    $('.hm-accept').on('click',function(){
+        if(call !== null) {
+            if(call == loadData){
+                loadData(parseInt(locStor('get','PIMsetting-paginate',null) || 20),null);
+            }else {
+                call();
+            }
+        }
+        setTimeout("$('.modal.message').remove()",300);
+    });
+    $('.hm-refuse').on('click',function(){
+        $('.modal.message').remove();
+    })
 }
 //calculator code
 (function($) {
@@ -331,47 +452,6 @@ function updateScroll(){
     }
 })(jQuery);
 $('#calculator').drags();
-//modal
-function genModal(type,fData,title,body,cta,labels,call){
-    var a = labels.split('::'),
-        b = a[0],
-        c = a[1];
-    if(type == 'form'){
-        var gen = '<div class="bi-form">',
-            fdx = fData.split('::'),
-            fdl = fdx.length;
-        for(i=0;i<fdl;i++){
-            gen += '<div class="bi-form-line">'+fdx[i]+'</div>';
-        }
-        gen += '</div>';
-
-    }
-    var structure = '<div class="modal message">';
-    structure += '<div class="modal content">';
-    structure += '<div class="modal title">'+title+'</div>';
-    if(type == 'form') {
-        structure += '<div class="modal body">' + gen + '</div>';
-    }else{
-        structure += '<div class="modal body">' + body + '</div>';
-    }
-    if(cta == 'prompt'){
-        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>'+b+'</span></div></div>';
-    }else if(cta == 'chose'){
-        structure += '<div class="modal cta"><div class="il prompt hm-accept"><span>'+b+'</span></div><div class="il decline hm-refuse"><span>'+c+'</span></div></div>';
-    }
-    structure += '</div>';
-    structure += '</div>';
-    $('body').prepend(structure);
-    $('.hm-accept').on('click',function(){
-        if(call !== null) {
-            call();
-        }
-        setTimeout("$('.modal.message').remove()",300);
-    });
-    $('.hm-refuse').on('click',function(){
-        $('.modal.message').remove();
-    })
-}
 // Get all the keys from document
 var keys = document.querySelectorAll('#calculator span');
 var operators = ['+', '-', 'x', '÷'];
@@ -481,29 +561,35 @@ for(var i = 0; i < keys.length; i++) {
     }
 
 })();
-function gutterToggle(){
-    if($('.gutter').css('left') == '-400px'){
-        $('.gutter').animate(
-            {left:0},
-            600
-        );
-        $('.rl.trigger').animate(
-            {left:320},
-            600
-        );
-    }else{
-        $('.gutter').animate(
-            {left:-400},
-            300
-        );
-        $('.rl.trigger').animate(
-            {left:420},
-            500
-        );
-    }
-}
 $('.c-hamburger').on('click',function(){
     gutterToggle();
+});
+$('body').on( "click", ".status_mess", function() {
+    var a = $(this).attr('data-row'),
+        b = $(this).attr('data-column');
+    hot.selectCell(a,b);
+});
+
+$('.flush span').click(function(){
+    dispMess = [];
+    $(eMessage).empty();
+});
+$('.calc span').click(function(){
+    if($('#calculator').css('display') == 'none'){
+        $('#calculator').show();
+        $('.calc span').html('Hide Calculator');
+    }else{
+        $('#calculator').hide();
+        $('.calc span').html('Show Calculator');
+    }
+
+});
+$('.save span').click(function(){
+    saveData();
+});
+$('.load span').click(function(){
+    //loadData();
+    genModal('mod',null,'Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose','YES::NO',loadData);
 });
 $('.gutter-settings').click(function(){
     var log = locStor('get','PIMsetting-log',null);
@@ -513,27 +599,28 @@ $('.gutter-settings').click(function(){
         logLabel = '';
     }
     var aSave = locStor('get','PIMsetting-autosave',null);
-    if(aSave == 'true' || log == null){
+    if(aSave == 'true' || aSave == null){
         var saveLabel = 'checked';
     }else{
         saveLabel = '';
     }
     var aCols = locStor('get','PIMsetting-cols',null);
-    if(aCols == 'true' || log == null){
+    if(aCols == 'true' || aCols == null){
         var colsLabel = 'checked';
     }else{
         colsLabel = '';
     }
     var aRows = locStor('get','PIMsetting-rows',null);
-    if(aRows == 'true' || log == null){
+    if(aRows == 'true' || aRows == null){
         var rowsLabel = 'checked';
     }else{
         rowsLabel = '';
     }
-    genModal('form','<label for="toggle-log"><input type="checkbox" id="toggle-log" '+logLabel+'>Toggle Log</label>::<label for="toggle-row"><input type="checkbox" class="checkbox" id="toggle-row" '+rowsLabel+' />Show Row Headers</label>::<label for="toggle-col"><input type="checkbox" class="checkbox" id="toggle-col" '+colsLabel+' />Show Column Headers</label>::<label for="autosave-feature"><input type="checkbox" class="checkbox" id="autosave-feature" '+saveLabel+' />Autosave</label>','Settings',null,'prompt','CLOSE::NO',null);
+        var pagiLabel = locStor('get','PIMsetting-paginate',null) || 20;
+    genModal('form','<label for="toggle-log"><input type="checkbox" id="toggle-log" '+logLabel+'>Toggle Log</label>::<label for="toggle-row"><input type="checkbox" class="checkbox" id="toggle-row" '+rowsLabel+' />Show Row Headers</label>::<label for="toggle-col"><input type="checkbox" class="checkbox" id="toggle-col" '+colsLabel+' />Show Column Headers</label>::<label for="autosave-feature"><input type="checkbox" class="checkbox" id="autosave-feature" '+saveLabel+' />Autosave</label>::<label for="paginate-line" style="margin: 0 30px;">Paginate <input type="text" value="'+pagiLabel+'" id="paginate-line"> articles</label>','Settings',null,'prompt','CLOSE::NO',null);
     $('.c-hamburger').trigger('click');
 });
-$('body').on('change', 'input[type="checkbox"]', function() {
+$('body').on('change', 'input[type="checkbox"],input#paginate-line', function() {
     var a = $(this).attr('id');
     switch(a){
         case 'toggle-log':
@@ -582,68 +669,20 @@ $('body').on('change', 'input[type="checkbox"]', function() {
                 $('#toggle-autosave').prop('checked',false);
             }
             break;
+        case 'paginate-line':
+                locStor('set','PIMsetting-paginate',$(this).val());
+                loadData($(this).val(),true);
+            break;
     }
 });
-function locStor(method,elem,value){
-    if(typeof(Storage) !== "undefined") {
-        if(method == 'set') {
-            localStorage.setItem(elem, value);
-        }else if(method == 'get') {
-            return localStorage.getItem(elem);
-        }else if(method == 'push') {
-            for (var a in localStorage) {
-                initSettings(a,localStorage[a]);
-            }
-        }
-    } else {
-        alert('Browser is not up to date');
-    }
-}
-function initSettings(item,value){
-    var initItem = item.replace('PIMsetting-','');
-    var initElem = 'toggle-';
-    switch(initItem){
-        case 'log':
-            if(value == 'true') {
-                $('#'+initElem+'log').prop('checked', true);
-                $('#message').show();
-            }else {
-                $('#'+initElem+'log').prop('checked', false);
-                $('#message').hide();
-            }
-            break;
-        case 'row':
-            if(value == 'true') {
-                $('#'+initElem+'row').prop('checked', true);
-                hot.updateSettings({
-                    rowHeaders: true
-                });
-            }else{
-                $('#'+initElem+'row').prop('checked', false);
-                hot.updateSettings({
-                    rowHeaders: false
-                });
-            }
-            break;
-        case 'col':
-            if(value == 'true') {
-                $('#'+initElem+'col').prop('checked', true);
-                hot.updateSettings({
-                    colHeaders: true
-                });
-            }else{
-                $('#'+initElem+'col').prop('checked', false);
-                hot.updateSettings({
-                    colHeaders: false
-                });
-            }
-            break;
-        case 'autosave':
-            if(value == 'true') {
-                $('#'+initElem+'autosave').prop('checked', true);
-            }else{
-                $('#'+initElem+'autosave').prop('checked',false);
-            }
-            break;
-    }
-}
+Handsontable.Dom.addEvent(searchField, 'keyup', function (event) {
+    var queryResult = hot.search.query(this.value);
+    hot.render();
+});
+
+Handsontable.Dom.addEvent(window, 'hashchange', function (event) {
+    loadData(parseInt(locStor('get','PIMsetting-paginate',null)),null);
+    $('.paginate-unit').removeClass('current-page');
+    var hash = window.location.hash.replace('#','');
+    $('.paginate-set').find('[data-unit="'+hash+'"]').addClass('current-page');
+});
