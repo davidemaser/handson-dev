@@ -476,7 +476,7 @@ input[type="checkbox"] {
     right: 18px;
     height: 8px;
     background: white;
-    &::before,::after{
+    &::before,&::after{
       position: absolute;
       display: block;
       left: 0;
@@ -496,7 +496,7 @@ input[type="checkbox"] {
     background-color: #ff3264;
     span {
       transition: background 0s 0.3s;
-      &::before,::after{
+      &::before,&::after{
         transition-duration: 0.3s, 0.3s;
         transition-delay: 0.3s, 0s;
       }
@@ -511,7 +511,7 @@ input[type="checkbox"] {
       background-color: #cb0032;
       span {
         background: none;
-        &::before,::after {
+        &::before,&::after {
           transition-delay: 0s, 0.3s;
         }
         &::before {
