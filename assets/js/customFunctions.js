@@ -39,7 +39,7 @@ $(eZone).handsontable({
         $(eMessage).empty();
         if(change){
             //save
-            if($('#autosave-feature').is(':checked')) {
+            if($('#autosave-command').is(':checked')) {
                 saveData();
             }
             //end save
@@ -62,6 +62,10 @@ $(eZone).handsontable({
                     }
                 }
         }
+        calculateSize();
+    },
+    beforeRender: function(){
+        locStor('push');
     },
     columns: [
         {data: 0, type: 'text',editor: false},
@@ -241,17 +245,7 @@ $('body').on( "click", ".status_mess", function() {
         b = $(this).attr('data-column');
     hot.selectCell(a,b);
 });
-$('#sRowHead').change(function(){
-    if($(this).is(':checked')){
-        hot.updateSettings({
-            rowHeaders: true
-        });
-    }else{
-        hot.updateSettings({
-            rowHeaders: false
-        });
-    }
-});
+
 $('.flush span').click(function(){
     dispMess = [];
     $(eMessage).empty();
@@ -273,17 +267,7 @@ $('.load span').click(function(){
     //loadData();
     genModal('mod',null,'Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose','YES::NO',loadData);
 });
-$('#sColHead').change(function(){
-    if($(this).is(':checked')){
-        hot.updateSettings({
-            colHeaders: ['ITEM ID','BRAND', 'NAME', 'ACTIVE', 'DATE ADDED', 'COLOR', 'SEASON', 'PRICE', 'MSRP', 'SKU', 'CATEGORY'],
-        });
-    }else{
-        hot.updateSettings({
-            colHeaders: false
-        });
-    }
-});
+
 function updateScroll(){
     var element = document.getElementById("message");
     element.scrollTop = element.scrollHeight;
@@ -481,7 +465,7 @@ for(var i = 0; i < keys.length; i++) {
     }
 
 })();
-$('.c-hamburger').on('click',function(){
+function gutterToggle(){
     if($('.gutter').css('left') == '-400px'){
         $('.gutter').animate(
             {left:0},
@@ -501,6 +485,9 @@ $('.c-hamburger').on('click',function(){
             500
         );
     }
+}
+$('.c-hamburger').on('click',function(){
+    gutterToggle();
 });
 $('.gutter-settings').click(function(){
     var log = locStor('get','PIMsetting-log',null);
@@ -509,7 +496,26 @@ $('.gutter-settings').click(function(){
     }else{
         logLabel = '';
     }
-    genModal('form','<label for="toggle-log">Toggle Log<input type="checkbox" id="toggle-log" '+logLabel+'></label>','Settings',null,'prompt','CLOSE::NO',null);
+    var aSave = locStor('get','PIMsetting-autosave',null);
+    if(aSave == 'true' || log == null){
+        var saveLabel = 'checked';
+    }else{
+        saveLabel = '';
+    }
+    var aCols = locStor('get','PIMsetting-cols',null);
+    if(aCols == 'true' || log == null){
+        var colsLabel = 'checked';
+    }else{
+        colsLabel = '';
+    }
+    var aRows = locStor('get','PIMsetting-rows',null);
+    if(aRows == 'true' || log == null){
+        var rowsLabel = 'checked';
+    }else{
+        rowsLabel = '';
+    }
+    genModal('form','<label for="toggle-log"><input type="checkbox" id="toggle-log" '+logLabel+'>Toggle Log</label>::<label for="sRowHead"><input type="checkbox" class="checkbox" id="sRowHead" '+rowsLabel+' />Show Row Headers</label>::<label for="sColHead"><input type="checkbox" class="checkbox" id="sColHead" '+colsLabel+' />Show Column Headers</label>::<label for="autosave-feature"><input type="checkbox" class="checkbox" id="autosave-feature" '+saveLabel+' />Autosave</label>','Settings',null,'prompt','CLOSE::NO',null);
+    $('.c-hamburger').trigger('click');
 });
 $('body').on('change', 'input[type="checkbox"]', function() {
     var a = $(this).attr('id');
@@ -525,23 +531,39 @@ $('body').on('change', 'input[type="checkbox"]', function() {
             break;
         case 'sRowHead':
             if($('#sRowHead').is(':checked')){
-                locStor('set','PIMsetting-rows',true)
+                locStor('set','PIMsetting-rows',true);
+                hot.updateSettings({
+                    rowHeaders: true
+                });
             }else{
-                locStor('set','PIMsetting-rows',false)
+                locStor('set','PIMsetting-rows',false);
+                hot.updateSettings({
+                    rowHeaders: false
+                });
             }
             break;
         case 'sColHead':
             if($('#sColHead').is(':checked')){
-                locStor('set','PIMsetting-cols',true)
+                locStor('set','PIMsetting-cols',true);
+                hot.updateSettings({
+                    colHeaders: ['ITEM ID','BRAND', 'NAME', 'ACTIVE', 'DATE ADDED', 'COLOR', 'SEASON', 'PRICE', 'MSRP', 'SKU', 'CATEGORY'],
+                });
+
             }else{
-                locStor('set','PIMsetting-cols',false)
+                locStor('set','PIMsetting-cols',false);
+                hot.updateSettings({
+                    colHeaders: false
+                });
+
             }
             break;
         case 'autosave-feature':
             if($('#autosave-feature').is(':checked')){
-                locStor('set','PIMsetting-autosave',true)
+                locStor('set','PIMsetting-autosave',true);
+                $('#autosave-command').prop('checked',true);
             }else{
-                locStor('set','PIMsetting-autosave',false)
+                locStor('set','PIMsetting-autosave',false);
+                $('#autosave-command').prop('checked',false);
             }
             break;
     }
@@ -552,17 +574,61 @@ function locStor(method,elem,value){
             localStorage.setItem(elem, value);
         }else if(method == 'get') {
             return localStorage.getItem(elem);
-        }else if(method == 'scan') {
-            //check and store all localStorage objects
+        }else if(method == 'push') {
             var archive = [];
             for (var a in localStorage) {
-                archive.push(a+' = '+localStorage[a]);
+                initSettings(a,localStorage[a]);
             }
         }
     } else {
         alert('Browser is not up to date');
     }
 }
-function checkSettings(){
-    var settings = ['log','rows','cols','autosave','reset','disconnect','warn','mobile','ortho'];
+function initSettings(item,value){
+    var initItem = item.replace('PIMsetting-','');
+    console.log(initItem+' : '+value);
+    switch(initItem){
+        case 'log':
+            if(value == 'true') {
+                $('#toggle-log').prop('checked', true);
+                $('#message').show();
+            }else {
+                $('#toggle-log').prop('checked', false);
+                $('#message').hide();
+            }
+            break;
+        case 'row':
+            if(value == 'true') {
+                $('#sRowHead').prop('checked', true);
+                hot.updateSettings({
+                    rowHeaders: true
+                });
+            }else{
+                $('#sRowHead').prop('checked', false);
+                hot.updateSettings({
+                    rowHeaders: false
+                });
+            }
+            break;
+        case 'col':
+            if(value == 'true') {
+                $('#sColHead').prop('checked', true);
+                hot.updateSettings({
+                    colHeaders: true
+                });
+            }else{
+                $('#sColHead').prop('checked', false);
+                hot.updateSettings({
+                    colHeaders: false
+                });
+            }
+            break;
+        case 'autosave':
+            if(value == 'true') {
+                $('#autosave-command').prop('checked', true);
+            }else{
+                $('#autosave-command').prop('checked',false);
+            }
+            break;
+    }
 }
