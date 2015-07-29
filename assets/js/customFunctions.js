@@ -295,6 +295,37 @@ function initPagination(min,max,units){
     })
 
 }
+function loadSettings(toggleGutter){
+    var log = locStor('get','PIMsetting-log',null);
+    if(log == 'true' || log == null){
+        var logLabel = 'checked';
+    }else{
+        logLabel = '';
+    }
+    var aSave = locStor('get','PIMsetting-autosave',null);
+    if(aSave == 'true' || aSave == null){
+        var saveLabel = 'checked';
+    }else{
+        saveLabel = '';
+    }
+    var aCols = locStor('get','PIMsetting-cols',null);
+    if(aCols == 'true' || aCols == null){
+        var colsLabel = 'checked';
+    }else{
+        colsLabel = '';
+    }
+    var aRows = locStor('get','PIMsetting-rows',null);
+    if(aRows == 'true' || aRows == null){
+        var rowsLabel = 'checked';
+    }else{
+        rowsLabel = '';
+    }
+    var pagiLabel = locStor('get','PIMsetting-paginate',null) || 20;
+    genModal('form','<label for="toggle-log"><input type="checkbox" id="toggle-log" '+logLabel+'>Toggle Log</label>::<label for="toggle-row"><input type="checkbox" class="checkbox" id="toggle-row" '+rowsLabel+' />Show Row Headers</label>::<label for="toggle-col"><input type="checkbox" class="checkbox" id="toggle-col" '+colsLabel+' />Show Column Headers</label>::<label for="autosave-feature"><input type="checkbox" class="checkbox" id="autosave-feature" '+saveLabel+' />Autosave</label>::<label for="paginate-line" style="margin: 0 30px;">Paginate <input type="text" value="'+pagiLabel+'" id="paginate-line"> articles</label>','Settings',null,'prompt','CLOSE::NO',null);
+    if(toggleGutter == true){
+        $('.c-hamburger').trigger('click');
+    }
+}
 function initSettings(item,value){
     var initItem = item.replace('PIMsetting-','');
     var initElem = 'toggle-';
@@ -347,11 +378,11 @@ function gutterToggle(){
     if($('.gutter').css('left') == '-400px'){
         $('.gutter').animate(
             {left:0},
-            600
+            300
         );
         $('.rl.trigger').animate(
             {left:320},
-            600
+            500
         );
     }else{
         $('.gutter').animate(
@@ -588,33 +619,7 @@ $('.load span').click(function(){
     genModal('mod',null,'Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose','YES::NO',loadData);
 });
 $('.gutter-settings').click(function(){
-    var log = locStor('get','PIMsetting-log',null);
-    if(log == 'true' || log == null){
-        var logLabel = 'checked';
-    }else{
-        logLabel = '';
-    }
-    var aSave = locStor('get','PIMsetting-autosave',null);
-    if(aSave == 'true' || aSave == null){
-        var saveLabel = 'checked';
-    }else{
-        saveLabel = '';
-    }
-    var aCols = locStor('get','PIMsetting-cols',null);
-    if(aCols == 'true' || aCols == null){
-        var colsLabel = 'checked';
-    }else{
-        colsLabel = '';
-    }
-    var aRows = locStor('get','PIMsetting-rows',null);
-    if(aRows == 'true' || aRows == null){
-        var rowsLabel = 'checked';
-    }else{
-        rowsLabel = '';
-    }
-        var pagiLabel = locStor('get','PIMsetting-paginate',null) || 20;
-    genModal('form','<label for="toggle-log"><input type="checkbox" id="toggle-log" '+logLabel+'>Toggle Log</label>::<label for="toggle-row"><input type="checkbox" class="checkbox" id="toggle-row" '+rowsLabel+' />Show Row Headers</label>::<label for="toggle-col"><input type="checkbox" class="checkbox" id="toggle-col" '+colsLabel+' />Show Column Headers</label>::<label for="autosave-feature"><input type="checkbox" class="checkbox" id="autosave-feature" '+saveLabel+' />Autosave</label>::<label for="paginate-line" style="margin: 0 30px;">Paginate <input type="text" value="'+pagiLabel+'" id="paginate-line"> articles</label>','Settings',null,'prompt','CLOSE::NO',null);
-    $('.c-hamburger').trigger('click');
+    loadSettings(true);
 });
 $('body').on('change', 'input[type="checkbox"],input#paginate-line', function() {
     var a = $(this).attr('id');
@@ -669,6 +674,41 @@ $('body').on('change', 'input[type="checkbox"],input#paginate-line', function() 
                 locStor('set','PIMsetting-paginate',$(this).val());
                 loadData($(this).val(),true);
             break;
+    }
+});
+$(window).on('keydown', function(event) {
+    if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+            case 's':
+                event.preventDefault();
+                saveData();
+                break;
+            case 'l':
+                event.preventDefault();
+                $(eMessage).toggle();
+                break;
+            case 'f':
+                event.preventDefault();
+                dispMess = [];
+                $(eMessage).empty();
+                break;
+            case 'd':
+                event.preventDefault();
+                genModal('mod',null,'Warning','All unsaved data will be lost. Make sure to save your work before proceding.<br/><br/>Click YES to continue or NO to return to the page.','chose','YES::NO',loadData);
+                break;
+            case 'p':
+                event.preventDefault();
+                loadSettings(false);
+                break;
+            case 'c':
+                event.preventDefault();
+                $('.calc span').click();
+                break;
+            case 'm':
+                event.preventDefault();
+                $('.c-hamburger').trigger('click');
+                break;
+        }
     }
 });
 $window.on('resize', calculateSize);
