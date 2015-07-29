@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c00e948e-7fb4-43e3-9d7c-8765cd7d8e3f" name="Default" comment="Added Features : Pagination">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/HANDSON.iml" afterPath="$PROJECT_DIR$/.idea/HANDSON.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/customFunctions.js" afterPath="$PROJECT_DIR$/assets/js/customFunctions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/gen-style.min.css" afterPath="$PROJECT_DIR$/assets/css/gen-style.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/scss/gen-style.scss" afterPath="$PROJECT_DIR$/assets/scss/gen-style.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HANDSON.iws" />
@@ -33,8 +33,8 @@
       <file leaf-file-name="dropdown.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dropdown.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1548">
-              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.6666667" vertical-offset="988" max-vertical-offset="1548">
+              <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#div#1;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -45,11 +45,10 @@
       <file leaf-file-name="customFunctions.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/customFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.65505224" vertical-offset="11828" max-vertical-offset="12420">
-              <caret line="678" column="0" selection-start-line="678" selection-start-column="0" selection-end-line="678" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.05923345" vertical-offset="12800" max-vertical-offset="13428">
+              <caret line="713" column="36" selection-start-line="713" selection-start-column="36" selection-end-line="713" selection-end-column="36" />
               <folding>
-                <marker date="1438120491139" expanded="true" signature="21623:21637" placeholder="..." />
-                <marker date="1438120491139" expanded="true" signature="21623:21638" placeholder="..." />
+                <marker date="1438181424273" expanded="true" signature="11567:11582" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -78,8 +77,8 @@
       <file leaf-file-name="gen-style.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/scss/gen-style.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.0526316" vertical-offset="8166" max-vertical-offset="10710">
-              <caret line="457" column="17" selection-start-line="457" selection-start-column="17" selection-end-line="457" selection-end-column="17" />
+            <state vertical-scroll-proportion="-3.2631578" vertical-offset="8202" max-vertical-offset="10818">
+              <caret line="466" column="12" selection-start-line="466" selection-start-column="12" selection-end-line="466" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -99,7 +98,7 @@
         <entry file="file://$PROJECT_DIR$/assets/bootstrap/css/bootstrap.css">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="14444" max-vertical-offset="15048">
-              <caret line="819" column="3" selection-start-line="819" selection-start-column="3" selection-end-line="819" selection-end-column="3" />
+              <caret line="813" column="29" selection-start-line="813" selection-start-column="29" selection-end-line="813" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -129,8 +128,9 @@
         <option value="$PROJECT_DIR$/assets/css/gen-style.css" />
         <option value="$PROJECT_DIR$/assets/data/test2.json" />
         <option value="$PROJECT_DIR$/dropdown.html" />
-        <option value="$PROJECT_DIR$/assets/scss/gen-style.scss" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/assets/js/customFunctions.js" />
+        <option value="$PROJECT_DIR$/assets/scss/gen-style.scss" />
       </list>
     </option>
   </component>
@@ -176,7 +176,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -283,6 +282,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -566,7 +566,13 @@
       <option name="project" value="LOCAL" />
       <updated>1438119243712</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Added Features : Pagination">
+      <created>1438120570660</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1438120570661</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -578,7 +584,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32604167" sideWeight="0.5002636" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.49973643" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32604167" sideWeight="0.49973643" order="7" side_tool="false" content_ui="tabs" />
@@ -643,6 +649,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/assets/scss/gen-style.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8166" max-vertical-offset="10710">
+          <caret line="457" column="17" selection-start-line="457" selection-start-column="17" selection-end-line="457" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/data/test2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="20898" max-vertical-offset="21744">
+          <caret line="1175" column="15" selection-start-line="1175" selection-start-column="15" selection-end-line="1175" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/bootstrap/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14444" max-vertical-offset="15048">
+          <caret line="819" column="3" selection-start-line="819" selection-start-column="3" selection-end-line="819" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dropdown.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1548">
@@ -658,8 +688,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="7477" max-vertical-offset="12348">
           <caret line="423" column="74" selection-start-line="423" selection-start-column="74" selection-end-line="423" selection-end-column="74" />
           <folding>
-            <marker date="1438120491139" expanded="true" signature="21623:21637" placeholder="..." />
-            <marker date="1438120491139" expanded="true" signature="21623:21638" placeholder="..." />
+            <marker date="1438181424273" expanded="true" signature="11567:11582" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -719,8 +748,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="3978">
           <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
           <folding>
-            <marker date="1438120491139" expanded="true" signature="21623:21637" placeholder="..." />
-            <marker date="1438120491139" expanded="true" signature="21623:21638" placeholder="..." />
+            <marker date="1438181424273" expanded="true" signature="11567:11582" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -748,8 +776,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="3255">
           <caret line="52" column="61" selection-start-line="52" selection-start-column="61" selection-end-line="52" selection-end-column="61" />
           <folding>
-            <marker date="1438120491139" expanded="true" signature="21623:21637" placeholder="..." />
-            <marker date="1438120491139" expanded="true" signature="21623:21638" placeholder="..." />
+            <marker date="1438181424273" expanded="true" signature="11567:11582" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -957,14 +984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/bootstrap/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="14444" max-vertical-offset="15048">
-          <caret line="819" column="3" selection-start-line="819" selection-start-column="3" selection-end-line="819" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/handsontable.full.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="15505" max-vertical-offset="26244">
@@ -997,10 +1016,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="617">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/bootstrap/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14444" max-vertical-offset="15048">
+          <caret line="813" column="29" selection-start-line="813" selection-start-column="29" selection-end-line="813" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dropdown.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="1548">
-          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.6666667" vertical-offset="988" max-vertical-offset="1548">
+          <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
           <folding>
             <element signature="n#style#0;n#span#0;n#div#1;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
@@ -1009,19 +1044,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/scss/gen-style.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0526316" vertical-offset="8166" max-vertical-offset="10710">
-          <caret line="457" column="17" selection-start-line="457" selection-start-column="17" selection-end-line="457" selection-end-column="17" />
+        <state vertical-scroll-proportion="-3.2631578" vertical-offset="8202" max-vertical-offset="10818">
+          <caret line="466" column="12" selection-start-line="466" selection-start-column="12" selection-end-line="466" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/customFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65505224" vertical-offset="11828" max-vertical-offset="12420">
-          <caret line="678" column="0" selection-start-line="678" selection-start-column="0" selection-end-line="678" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.05923345" vertical-offset="12800" max-vertical-offset="13428">
+          <caret line="713" column="36" selection-start-line="713" selection-start-column="36" selection-end-line="713" selection-end-column="36" />
           <folding>
-            <marker date="1438120491139" expanded="true" signature="21623:21637" placeholder="..." />
-            <marker date="1438120491139" expanded="true" signature="21623:21638" placeholder="..." />
+            <marker date="1438181424273" expanded="true" signature="11567:11582" placeholder="..." />
           </folding>
         </state>
       </provider>

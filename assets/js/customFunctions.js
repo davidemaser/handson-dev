@@ -293,7 +293,6 @@ function initPagination(min,max,units){
         var a = $(this).attr('data-unit');
         window.location.hash = a;
     })
-
 }
 function loadSettings(toggleGutter){
     var log = locStor('get','PIMsetting-log',null);
@@ -370,6 +369,16 @@ function initSettings(item,value){
                 $('#'+initElem+'autosave').prop('checked', true);
             }else{
                 $('#'+initElem+'autosave').prop('checked',false);
+            }
+            break;
+        case 'calcleft':
+            if(value !== '') {
+                $('#calculator').css('left',value+'px');
+            }
+            break;
+        case 'calctop':
+            if(value !== '') {
+                $('#calculator').css('top',value+'px');
             }
             break;
     }
@@ -475,8 +484,8 @@ function genModal(type,fData,title,body,cta,labels,call){
             });
             e.preventDefault(); // disable selection
         }).on("mouseup", function() {
-            locStor('set','PIMsetting-calctop',$('#calculator').offset().top);
-            locStor('set','PIMsetting-calcleft',$('#calculator').offset().left);
+            locStor('set','PIMsetting-calctop',Math.round($('#calculator').offset().top));
+            locStor('set','PIMsetting-calcleft',Math.round($('#calculator').offset().left));
             if(opt.handle === "") {
                 $(this).removeClass('draggable');
             } else {
@@ -487,6 +496,7 @@ function genModal(type,fData,title,body,cta,labels,call){
     }
 })(jQuery);
 $('#calculator').drags();
+
 // Get all the keys from document
 var keys = document.querySelectorAll('#calculator span');
 var operators = ['+', '-', 'x', '÷'];
@@ -710,7 +720,13 @@ $(window).on('keydown', function(event) {
                 break;
         }
     }
+}).on('resize', function(event) {
+    var w = $(window).width(),
+        h = $(window).height();
+    locStor('set','PIMsetting-winwidth',w);
+    locStor('set','PIMsetting-winheight',h);
 });
+
 $window.on('resize', calculateSize);
 Handsontable.Dom.addEvent(searchField, 'keyup', function (event) {
     var queryResult = hot.search.query(this.value);
